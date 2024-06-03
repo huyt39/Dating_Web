@@ -256,3 +256,28 @@ a{
     line-height: 135.8%; /* 2.4444rem */
     margin-top: 1.9rem;
 }
+
+/* footer */
+footer{
+    position: relative;
+    margin: 2rem 6.06rem;
+    height: 3rem;
+    text-align: right;
+}
+
+footer::before{
+    content: '';
+    height: 0.1rem;
+    width: 100%;
+    background: #D4D8DE;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+footer p {
+    height: 3rem;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
