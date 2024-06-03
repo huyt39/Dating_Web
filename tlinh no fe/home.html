@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/home.css">
+    <link rel="stylesheet" href="assets/font/stylesheet.css">
+</head>
+<body>
+    <main>
+        <div class="upper">
+            <div class="back-ground"></div>
+            <div class="nav-bar">
+                <div class="left">
+                    <img src="./assets/img/logo.svg" alt="" class="logo">
+                    <ul>
+                        <li><a href="" class="link">Products</a></li>
+                        <li><a href="" class="link">Learn</a></li>
+                        <li><a href="" class="link">Safety</a></li>
+                        <li><a href="" class="link">Support</a></li>
+                        <li><a href="" class="link">Download</a></li>
+                    </ul>
+                </div>
+                <div class="action">
+                    <a href="" class="signup">Signup</a>
+                    <a href="javascript:void(0)" class="btn" id="loginBtn">Log in</a>
+                </div>
+            </div>
+
+            <div class="hero" id="createAccountBtn">
+                <h1 class="title" >Swipe Right</h1>
+                <a href="" class="btn" >Create account</a>
+            </div>
+        </div>
+
+        <div class="feedback-list">
+            <div class="feedback-item">
+                <h3 class="title">Shannon & Julian</h3>
+                <p class="desc">Without the app we may have never met and embarked on this wild, wonderful journey. Thank you for bringing us and so many other couples together around the world. I will forever be grateful</p>
+            </div>
+            <div class="feedback-item">
+                <h3 class="title">Shannon & Julian</h3>
+                <p class="desc">I was feeling lonely back in my hometown because most of my friends had started romantic relationships while I was abroad. We both decided to download Tinder and see what happened. .</p>
+            </div>
+            <div class="feedback-item">
+                <h3 class="title">Shannon & Julian</h3>
+                <p class="desc">I was feeling lonely back in my hometown because most of my friends had started romantic relationships while I was abroad. We both decided to download Tinder and see what happened. .</p>
+            </div>
+        </div>
+
+        <footer>
+            
+        </footer>
+    </main>
+    <!-- popup login -->
+    <div class="popup" id="loginPopup">
+        <form class="popup-content">
+            <img src="./assets/img/tinder-2.svg" alt="" class="logo">
+            <h3 class="title">Get Started</h3>
+            <input type="text" placeholder="Username">
+            <input type="password" placeholder="Password">
+            <button>Login</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginBtn').addEventListener('click', function() {
+            var popup = document.getElementById('loginPopup');
+            popup.classList.add('active');
+        });
+
+        document.querySelector('.popup').addEventListener('click', function(e) {
+            if (e.target === e.currentTarget) {
+                var popup = document.getElementById('loginPopup');
+                popup.classList.remove('active');
+            }
+        });
+
+        // Close popup if close button exists
+        var closeBtn = document.querySelector('.close-btn');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                var popup = document.getElementById('loginPopup');
+                popup.classList.remove('active');
+            });
+        }
+
+        // Scroll event to change button opacity
+        window.addEventListener('scroll', function() {
+            var scrollPosition = window.scrollY;
+            var heroHeight = document.querySelector('.hero').offsetHeight;
+            var createAccountBtn = document.getElementById('createAccountBtn');
+
+            if (scrollPosition < heroHeight) {
+                var opacity = 1 - scrollPosition / heroHeight;
+                createAccountBtn.style.opacity = opacity;
+            } else {
+                createAccountBtn.style.opacity = 0;
+            }
+        });
+    </script>
+</body>
+</html>
