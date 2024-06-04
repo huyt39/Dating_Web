@@ -1,0 +1,51 @@
+extends ../../layouts/default.pug
+include ../../mixins/box-head.pug
+include ../../mixins/moment.pug
+
+
+block main
+  .partner-detail
+    .container.my-3
+      .row
+        .col-6
+            if(partnerDetail.images)
+                .inner-images
+                    each image in partnerDetail.images 
+                        .inner-image
+                            img(src=image)
+                    
+                    
+        .col-6
+          .inner-title #{partnerDetail.title}
+
+          .inner-barcode
+            <i class="fa-solid fa-barcode"></i> Mã partner: #{partnerDetail.code}
+
+
+
+          form(
+            form-add-to-cart
+            tour-id=tourDetail.id
+          )
+            input(
+              class="form-control mb-2"
+              type="number"
+              name="quantity"
+              value="1"
+              min="1"
+              max=10
+            )
+            button(
+              type="submit"
+              class="btn btn-success btn-block"
+            ) Ghép đôi
+      
+      
+      .row
+        .col-12
+          .inner-infomation
+            .inner-label Thông tin người dùng
+            .inner-text
+              | !{tourDetail.information}
+
+        
