@@ -296,6 +296,7 @@ main .info{
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     text-align: center;
     width: 40rem;
+    z-index: 100;
 }
 
 .popup h2 {
@@ -422,4 +423,6 @@ main .info{
     background: linear-gradient(90deg, #ff6347, #ff1493);
     cursor: pointer;
 }
+
+
 

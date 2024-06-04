@@ -136,6 +136,7 @@
                 </div>
             </div>
             <!-- popup -->
+            
             <div id="popup" class="popup">
                 <h2>What are you looking for?</h2>
                 <p>All good if it changes. There's something for everyone.</p>
@@ -162,7 +163,7 @@
             <h2 class="optional-title">Optional</h2>
             <div class="form-group">
                 <label for="interest">Interest</label>
-                <input type="text">
+                <input type="text" id="interest">
             </div>
         </div>
         <div class="sign">
@@ -279,41 +280,45 @@
         const signUpButton = document.getElementById('signUpButton');
 
         signUpButton.addEventListener('click', function (event) {
-            event.preventDefault(); // Ngăn chặn hành vi mặc định của nút submit
+    event.preventDefault();
 
-            const formData = new FormData();
+    const formData = new FormData();
 
-            // Thêm dữ liệu vào formData
-            formData.append('name', document.getElementById('name').value);
-            formData.append('email', document.getElementById('email').value);
-            formData.append('major', document.getElementById('major').value);
-            formData.append('birthday', `${document.getElementById('birthday-year').value}-${document.getElementById('birthday-month').value}-${document.getElementById('birthday-day').value}`);
-            formData.append('gender', document.querySelector('input[name="gender"]:checked').value);
-            formData.append('interestedGender', document.querySelector('input[name="interested-gender"]:checked').value);
-            formData.append('relationshipIntent', document.querySelector('input[name="option"]:checked').value);
+    formData.append('name', document.getElementById('name').value);
+    formData.append('email', document.getElementById('email').value);
+    formData.append('major', document.getElementById('major').value);
+    formData.append('birthday', `${document.getElementById('birthday-year').value}-${document.getElementById('birthday-month').value}-${document.getElementById('birthday-day').value}`);
+    formData.append('gender', document.querySelector('input[name="gender"]:checked').value);
+    formData.append('interestedGender', document.querySelector('input[name="interested-gender"]:checked').value);
+    formData.append('relationshipIntent', document.querySelector('input[name="option"]:checked').value);
+    formData.append('interest', document.getElementById('interest').value);
 
-            // Thêm các file ảnh vào formData
-            const photoInputs = document.querySelectorAll('.photo-upload input[type="file"]');
-            photoInputs.forEach((input, index) => {
-                formData.append(`photo${index}`, input.files[0]);
-            });
+    const photoInputs = document.querySelectorAll('.photo-upload input[type="file"]');
+    photoInputs.forEach((input, index) => {
+        formData.append(`photo${index}`, input.files[0]);
+    });
 
-            fetch('/submit-form', {
-                method: 'POST',
-                body: formData
-            })
-                .then(response => {
-                    if (response.ok) {
-                        console.log('Form submitted successfully');
-                        // Xử lý thêm nếu cần
-                    } else {
-                        console.error('Error submitting form');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        });
+    // Log dữ liệu FormData ra console để kiểm tra
+    for (let pair of formData.entries()) {
+        console.log(pair[0] + ': ' + pair[1]);
+    }
+
+    fetch('/submit-form', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Form submitted successfully');
+        } else {
+            console.error('Error submitting form');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});
+
     </script>
 
     <script>
