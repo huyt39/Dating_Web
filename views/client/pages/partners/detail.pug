@@ -4,7 +4,7 @@ include ../../mixins/moment.pug
 
 
 block main
-  .tour-detail
+  .partner-detail
     .container.my-3
       .row
         .col-6
@@ -19,7 +19,7 @@ block main
           .inner-title #{partnerDetail.title}
 
           .inner-barcode
-            <i class="fa-solid fa-barcode"></i> Mã partner: #{tourDetail.code}
+            <i class="fa-solid fa-barcode"></i> Mã partner: #{partnerDetail.code}
 
 
 
@@ -33,7 +33,7 @@ block main
               name="quantity"
               value="1"
               min="1"
-              max=tourDetail.stock
+              max=10
             )
             button(
               type="submit"
