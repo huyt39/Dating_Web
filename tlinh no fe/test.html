@@ -1,61 +1,185 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Photo Upload with Cropper</title>
-    <link rel="stylesheet" href="./assets/css/test.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
+    <title>Popup Selection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #202020;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            border: 2px solid #888;
+            border-radius: 20px;
+            background-color: #2c2c2c;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .button:hover {
+            border-color: #ff6347;
+        }
+
+        .selected-option {
+            display: inline-block;
+            padding: 10px 20px;
+            border: 2px solid #ff6347;
+            border-radius: 20px;
+            background-color: #2c2c2c;
+            color: #fff;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #2c2c2c;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            width: 300px;
+        }
+
+        .popup h2 {
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .popup p {
+            margin-bottom: 20px;
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        .popup .options {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .popup .options label {
+            display: block;
+            width: 100px;
+            height: 100px;
+            padding: 10px;
+            background-color: #333;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup .options input[type="radio"] {
+            display: none;
+        }
+
+        .popup .options input[type="radio"]:checked + label {
+            border: 2px solid #ff6347;
+        }
+
+        .popup .actions {
+            margin-top: 20px;
+        }
+
+        .popup .actions button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            background: linear-gradient(90deg, #ff6347, #ff1493);
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .popup .actions button:hover {
+            background: linear-gradient(90deg, #ff1493, #ff6347);
+        }
+
+        #selectedOption {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #333;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <div class="photo-grid">
-            <div class="photo-upload" id="photo-upload-0">
-                <input type="file" accept="image/*" class="file-input" onchange="openCropper(event, 0)">
-                <img src="plus-icon.png" alt="Upload" class="upload-icon" id="photo0">
-            </div>
-            <div class="photo-upload" id="photo-upload-1">
-                <input type="file" accept="image/*" class="file-input" onchange="openCropper(event, 1)">
-                <img src="" alt="Upload" class="upload-icon" id="photo1">
-            </div>
-            <div class="photo-upload" id="photo-upload-2">
-                <input type="file" accept="image/*" class="file-input" onchange="openCropper(event, 2)">
-                <img src="" alt="Upload" class="upload-icon" id="photo2">
-            </div>
-            <div class="photo-upload" id="photo-upload-3">
-                <input type="file" accept="image/*" class="file-input" onchange="openCropper(event, 3)">
-                <img src="plus-icon.png" alt="Upload" class="upload-icon" id="photo3">
-            </div>
-            <div class="photo-upload" id="photo-upload-4">
-                <input type="file" accept="image/*" class="file-input" onchange="openCropper(event, 4)">
-                <img src="plus-icon.png" alt="Upload" class="upload-icon" id="photo4">
-            </div>
-            <div class="photo-upload" id="photo-upload-5">
-                <input type="file" accept="image/*" class="file-input" onchange="openCropper(event, 5)">
-                <img src="plus-icon.png" alt="Upload" class="upload-icon" id="photo5">
-            </div>
-        </div>
-        <p>Upload 2 photos to start. Add 4 or more to make your profile stand out.</p>
+        <div id="relationshipIntent" class="button">+ Add Relationship Intent</div>
+        <div id="selectedOption" class="selected-option" style="display: none;"></div>
     </div>
 
-    <!-- Cropper Modal -->
-    <div id="cropperModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeCropper()">&times;</span>
-            <h2>Adjust Photo</h2>
-            <div class="crop-container">
-                <img id="cropperImage" src="" alt="Cropper">
-            </div>
-            <div class="crop-controls">
-                <input type="range" min="1" max="3" step="0.1" id="zoom-range">
-                <button onclick="rotateImage()">Rotate</button>
-            </div>
-            <button class="choose-button" onclick="cropImage()">Choose</button>
-            <button class="cancel-button" onclick="closeCropper()">Cancel</button>
+    <div id="popup" class="popup">
+        <h2>What are you looking for?</h2>
+        <p>All good if it changes. There's something for everyone.</p>
+        <ul class="options">
+            <li><input type="radio" id="option1" name="option" value="💘 Long-term partner"><label for="option1">💘<br>Long-term partner</label></li>
+            <li><input type="radio" id="option2" name="option" value="😍 Long-term, open to short"><label for="option2">😍<br>Long-term, open to short</label></li>
+            <li><input type="radio" id="option3" name="option" value="🥂 Short-term, open to long"><label for="option3">🥂<br>Short-term, open to long</label></li>
+            <li><input type="radio" id="option4" name="option" value="🎉 Short-term fun"><label for="option4">🎉<br>Short-term fun</label></li>
+            <li><input type="radio" id="option5" name="option" value="👋 New friends"><label for="option5">👋<br>New friends</label></li>
+            <li><input type="radio" id="option6" name="option" value="🤔 Still figuring it out"><label for="option6">🤔<br>Still figuring it out</label></li>
+        </ul>
+        <div class="actions">
+            <button id="save">Save</button>
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
-    <script src="./assets/js/test.js"></script>
+    <script>
+        const relationshipIntentButton = document.getElementById('relationshipIntent');
+        const popup = document.getElementById('popup');
+        const saveButton = document.getElementById('save');
+        const selectedOptionDiv = document.getElementById('selectedOption');
+
+        relationshipIntentButton.addEventListener('click', () => {
+            popup.style.display = 'block';
+        });
+
+        saveButton.addEventListener('click', () => {
+            const selectedOption = document.querySelector('input[name="option"]:checked');
+            if (selectedOption) {
+                selectedOptionDiv.innerHTML = selectedOption.value;
+                selectedOptionDiv.style.display = 'inline-block';
+                relationshipIntentButton.innerHTML = '<i class="fa fa-pencil"></i> Edit Relationship Intent';
+            }
+            popup.style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target === popup) {
+                popup.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>

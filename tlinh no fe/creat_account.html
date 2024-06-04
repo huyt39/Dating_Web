@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="assets/font/stylesheet.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
 </head>
+
 <body>
     <div class="nav-bar">
         <img src="./assets/img/logo.png" alt="" class="logo">
@@ -19,12 +21,16 @@
         <div class="info">
             <div class="field">
                 <div class="form-group">
-                    <label for="first-name">First Name</label>
-                    <input type="text" id="first-name" placeholder="First Name">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" placeholder="Name">
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" placeholder="ngtuanlinh.148@gmail.com">
+                    <input type="email" id="email" placeholder="abc@gmail.com">
+                </div>
+                <div class="form-group">
+                    <label for="major">Major</label>
+                    <input type="text" id="major" placeholder="CNTT, Dệt may, ...">
                 </div>
                 <div class="form-group birthday-group">
                     <div class="linh">
@@ -54,7 +60,34 @@
                         </div>
                     </div>
                 </div>
-                
+
+                <div class="form-group">
+                    <label for="interested-gender">Interested in</label>
+                    <div class="gender-options">
+                        <div class="gender-option" id="gender-men" onclick="selectInterest('men')">
+                            <input type="radio" name="interested-gender" id="men" value="men">
+                            <label for="men">Men</label>
+                        </div>
+                        <div class="gender-option" id="gender-women" onclick="selectInterest('women')">
+                            <input type="radio" name="interested-gender" id="women" value="women">
+                            <label for="women">Women</label>
+                        </div>
+                        <div class="gender-option" id="gender-everyone" onclick="selectInterest('everyone')">
+                            <input type="radio" name="interested-gender" id="everyone" value="everyone">
+                            <label for="everyone">Everyone</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="looking-for">Looking for</label>
+                    <div class="container">
+                        <div id="relationshipIntent" class="button">+ Add Relationship Intent</div>
+                        <div id="selectedOption" class="selected-option" style="display: none; border-radius: 999px;">
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <div class="upload-photo">
                 <div class="label">Profile photos</div>
@@ -102,27 +135,192 @@
                     <button class="cancel-button" onclick="closeCropper()">Cancel</button>
                 </div>
             </div>
+            <!-- popup -->
+            <div id="popup" class="popup">
+                <h2>What are you looking for?</h2>
+                <p>All good if it changes. There's something for everyone.</p>
+                <ul class="options">
+                    <li><input type="radio" id="option1" name="option" value="💘 Long-term partner"><label
+                            for="option1">💘<br>Long-term partner</label></li>
+                    <li><input type="radio" id="option2" name="option" value="😍 Long-term, open to short"><label
+                            for="option2">😍<br>Long-term, open to short</label></li>
+                    <li><input type="radio" id="option3" name="option" value="🥂 Short-term, open to long"><label
+                            for="option3">🥂<br>Short-term, open to long</label></li>
+                    <li><input type="radio" id="option4" name="option" value="🎉 Short-term fun"><label
+                            for="option4">🎉<br>Short-term fun</label></li>
+                    <li><input type="radio" id="option5" name="option" value="👋 New friends"><label
+                            for="option5">👋<br>New friends</label></li>
+                    <li><input type="radio" id="option6" name="option" value="🤔 Still figuring it out"><label
+                            for="option6">🤔<br>Still figuring it out</label></li>
+                </ul>
+                <div class="actions">
+                    <button id="save">Save</button>
+                </div>
+            </div>
         </div>
+        <div class="optional">
+            <h2 class="optional-title">Optional</h2>
+            <div class="form-group">
+                <label for="interest">Interest</label>
+                <input type="text">
+            </div>
+        </div>
+        <div class="sign">
+            <button id="signUpButton" class="sign-up" disabled>Sign Up</button>
+        </div>
+        
     </main>
 
     <script>
         function selectGender(gender) {
-    const manOption = document.getElementById('gender-man');
-    const womanOption = document.getElementById('gender-woman');
-    
-    if (gender === 'man') {
-        manOption.classList.add('selected');
-        womanOption.classList.remove('selected');
-        document.getElementById('man').checked = true;
-    } else {
-        womanOption.classList.add('selected');
-        manOption.classList.remove('selected');
-        document.getElementById('woman').checked = true;
-    }
-}
+            const manOption = document.getElementById('gender-man');
+            const womanOption = document.getElementById('gender-woman');
 
+            if (gender === 'man') {
+                manOption.classList.add('selected');
+                womanOption.classList.remove('selected');
+                document.getElementById('man').checked = true;
+            } else {
+                womanOption.classList.add('selected');
+                manOption.classList.remove('selected');
+                document.getElementById('woman').checked = true;
+            }
+        }
+
+        function selectInterest(gender) {
+            const menOption = document.getElementById('gender-men');
+            const womenOption = document.getElementById('gender-women');
+            const everyoneOption = document.getElementById('gender-everyone');
+
+            if (gender === 'men') {
+                menOption.classList.add('selected');
+                womenOption.classList.remove('selected');
+                everyoneOption.classList.remove('selected');
+                document.getElementById('men').checked = true;
+            } else if (gender === 'women') {
+                womenOption.classList.add('selected');
+                menOption.classList.remove('selected');
+                everyoneOption.classList.remove('selected');
+                document.getElementById('women').checked = true;
+            } else {
+                everyoneOption.classList.add('selected');
+                womenOption.classList.remove('selected');
+                menOption.classList.remove('selected');
+                document.getElementById('everyone').checked = true;
+            }
+        }
+
+        const relationshipIntentButton = document.getElementById('relationshipIntent');
+        const popup = document.getElementById('popup');
+        const saveButton = document.getElementById('save');
+        const selectedOptionDiv = document.getElementById('selectedOption');
+
+        relationshipIntentButton.addEventListener('click', () => {
+            popup.style.display = 'block';
+        });
+
+        saveButton.addEventListener('click', () => {
+            const selectedOption = document.querySelector('input[name="option"]:checked');
+            if (selectedOption) {
+                selectedOptionDiv.innerHTML = selectedOption.value;
+                selectedOptionDiv.style.display = 'inline-block';
+                relationshipIntentButton.innerHTML = '<i class="fa fa-pencil"></i> Edit Relationship Intent';
+            }
+            popup.style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target === popup) {
+                popup.style.display = 'none';
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const signUpButton = document.getElementById('signUpButton');
+            const requiredFields = [
+                document.getElementById('name'),
+                document.getElementById('email'),
+                document.getElementById('major'),
+                document.getElementById('birthday-month'),
+                document.getElementById('birthday-day'),
+                document.getElementById('birthday-year'),
+                ...document.querySelectorAll('input[name="gender"]'),
+                ...document.querySelectorAll('input[name="interested-gender"]'),
+                ...document.querySelectorAll('input[name="option"]'),
+                document.getElementById('photo-upload-0').querySelector('input'),
+                document.getElementById('photo-upload-1').querySelector('input')
+            ];
+
+            const checkFields = () => {
+                let allFilled = requiredFields.every(field => {
+                    if (field.type === 'file') {
+                        return field.files.length > 0; // Check if the file input has files
+                    } else if (field.type === 'radio') {
+                        return Array.from(requiredFields).filter(f => f.name === field.name && f.checked).length > 0;
+                    } else {
+                        return field.value.trim() !== '';
+                    }
+                });
+                signUpButton.disabled = !allFilled;
+                signUpButton.classList.toggle('enabled', allFilled);
+            };
+
+            requiredFields.forEach(field => {
+                if (field.type === 'radio') {
+                    field.addEventListener('change', checkFields);
+                } else {
+                    field.addEventListener('input', checkFields);
+                }
+            });
+
+            checkFields(); // Check initially in case some fields are pre-filled
+        });
+
+        const signUpButton = document.getElementById('signUpButton');
+
+        signUpButton.addEventListener('click', function (event) {
+            event.preventDefault(); // Ngăn chặn hành vi mặc định của nút submit
+
+            const formData = new FormData();
+
+            // Thêm dữ liệu vào formData
+            formData.append('name', document.getElementById('name').value);
+            formData.append('email', document.getElementById('email').value);
+            formData.append('major', document.getElementById('major').value);
+            formData.append('birthday', `${document.getElementById('birthday-year').value}-${document.getElementById('birthday-month').value}-${document.getElementById('birthday-day').value}`);
+            formData.append('gender', document.querySelector('input[name="gender"]:checked').value);
+            formData.append('interestedGender', document.querySelector('input[name="interested-gender"]:checked').value);
+            formData.append('relationshipIntent', document.querySelector('input[name="option"]:checked').value);
+
+            // Thêm các file ảnh vào formData
+            const photoInputs = document.querySelectorAll('.photo-upload input[type="file"]');
+            photoInputs.forEach((input, index) => {
+                formData.append(`photo${index}`, input.files[0]);
+            });
+
+            fetch('/submit-form', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Form submitted successfully');
+                        // Xử lý thêm nếu cần
+                    } else {
+                        console.error('Error submitting form');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+
+    <script>
+        
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
     <script src="./assets/js/test.js"></script>
 </body>
+
 </html>
