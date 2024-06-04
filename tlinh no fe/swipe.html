@@ -14,64 +14,49 @@
 <body>
 	<div class="container">
 		<div class="side">
-			<div class="header">
-				<div class="avatar">
-					<img src="https://randomuser.me/api/portraits/women/64.jpg" alt="" />
-				</div>
-				<div class="title">Meu perfil</div>
-			</div>
-			<div class="menu">
-				<ul>
-					<li>Matches</li>
-					<li class="active">Mensagens</li>
-				</ul>
-			</div>
-			<div class="messages">
-				<div class="avatar">
-					<img src="https://randomuser.me/api/portraits/women/38.jpg" alt="" />
-				</div>
-				<div class="message">
-					<div class="user">Caroline</div>
-					<div class="text">Lorem ipsum dolor sit amet consectetur adipisicing</div>
-				</div>
-			</div>
-			<div class="messages">
-				<div class="avatar">
-					<img src="https://randomuser.me/api/portraits/women/39.jpg" alt="" />
-				</div>
-				<div class="message">
-					<div class="user">Caroline</div>
-					<div class="text">Lorem ipsum dolor sit amet consectetur adipisicing</div>
-				</div>
-			</div>
-			<div class="messages">
-				<div class="avatar">
-					<img src="https://randomuser.me/api/portraits/women/40.jpg" alt="" />
-				</div>
-				<div class="message">
-					<div class="user">Caroline</div>
-					<div class="text">Lorem ipsum dolor sit amet consectetur adipisicing</div>
-				</div>
-			</div>
-			<div class="messages">
-				<div class="avatar">
-					<img src="https://randomuser.me/api/portraits/women/41.jpg" alt="" />
-				</div>
-				<div class="message">
-					<div class="user">Caroline</div>
-					<div class="text">Lorem ipsum dolor sit amet consectetur adipisicing</div>
-				</div>
-			</div>
-			<div class="messages">
-				<div class="avatar">
-					<img src="https://randomuser.me/api/portraits/women/42.jpg" alt="" />
-				</div>
-				<div class="message">
-					<div class="user">Caroline</div>
-					<div class="text">Lorem ipsum dolor sit amet consectetur adipisicing</div>
-				</div>
-			</div>
-		</div>
+            <div class="header">
+                <div class="avatar">
+                    <img src="your-avatar-url.jpg" alt="Avatar">
+                </div>
+                <div class="title">Meu perfil</div>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li class="active" id="matchesTab">Matches</li>
+                    <li id="messagesTab">Mensagens</li>
+                </ul>
+            </div>
+            <div class="content-section" id="matchesList">
+                <div class="messages">
+                    <div class="message">
+                        <div class="avatar"><img src="avatar1.jpg" alt="Kevin"></div>
+                        <div class="user">Kevin</div>
+                        <div class="text">New Match! Say Hello 👋</div>
+                    </div>
+                    <div class="message">
+                        <div class="avatar"><img src="avatar2.jpg" alt="Jared"></div>
+                        <div class="user">Jared</div>
+                        <div class="text">New Match! Say Hello 👋</div>
+                    </div>
+                    <!-- Thêm các mục Matches khác tại đây -->
+                </div>
+            </div>
+            <div class="content-section" id="messagesList" style="display: none;">
+                <div class="messages">
+                    <div class="message">
+                        <div class="avatar"><img src="avatar3.jpg" alt="David"></div>
+                        <div class="user">David</div>
+                        <div class="text">You have the cutest smile I've ever seen...</div>
+                    </div>
+                    <div class="message">
+                        <div class="avatar"><img src="avatar4.jpg" alt="Hank"></div>
+                        <div class="user">Hank</div>
+                        <div class="text">What are you up to this weekend...</div>
+                    </div>
+                    <!-- Thêm các tin nhắn khác tại đây -->
+                </div>
+            </div>
+        </div>
 		<div class="content">
 			<div class="frame"></div>
 			<div class="icons">
@@ -194,6 +179,20 @@
 			setTransform(0, 0, 0, 100)
 			setTimeout(() => current.style.transition = '', 100)
 		}
+
+		document.getElementById('matchesTab').addEventListener('click', function() {
+    document.getElementById('matchesList').style.display = 'flex';
+    document.getElementById('messagesList').style.display = 'none';
+    this.classList.add('active');
+    document.getElementById('messagesTab').classList.remove('active');
+});
+
+document.getElementById('messagesTab').addEventListener('click', function() {
+    document.getElementById('matchesList').style.display = 'none';
+    document.getElementById('messagesList').style.display = 'flex';
+    this.classList.add('active');
+    document.getElementById('matchesTab').classList.remove('active');
+});
 	</script>
 </body>
 

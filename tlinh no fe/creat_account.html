@@ -32,6 +32,14 @@
                     <label for="major">Major</label>
                     <input type="text" id="major" placeholder="CNTT, Dệt may, ...">
                 </div>
+                <div class="form-group">
+                    <label for="khoa">Khóa</label>
+                    <input type="text" id="khoa" placeholder="K68, K67,...">
+                </div>
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <input type="text" id="country" placeholder="Thanh Hóa, Hải Phòng, Nghệ An, Hải Dương,...">
+                </div>
                 <div class="form-group birthday-group">
                     <div class="linh">
                         <label for="birthday-month">Month</label>
@@ -165,6 +173,10 @@
                 <label for="interest">Interest</label>
                 <input type="text" id="interest">
             </div>
+            <div class="form-group">
+                <label for="more-info">More about you</label>
+                <input type="text" id="more-info">
+            </div>
         </div>
         <div class="sign">
             <button id="signUpButton" class="sign-up" disabled>Sign Up</button>
@@ -242,6 +254,8 @@
                 document.getElementById('name'),
                 document.getElementById('email'),
                 document.getElementById('major'),
+                document.getElementById('khoa'),
+                document.getElementById('country'),
                 document.getElementById('birthday-month'),
                 document.getElementById('birthday-day'),
                 document.getElementById('birthday-year'),
@@ -287,11 +301,14 @@
     formData.append('name', document.getElementById('name').value);
     formData.append('email', document.getElementById('email').value);
     formData.append('major', document.getElementById('major').value);
+    formData.append('khoa', document.getElementById('khoa').value);
+    formData.append('country', document.getElementById('country').value);
     formData.append('birthday', `${document.getElementById('birthday-year').value}-${document.getElementById('birthday-month').value}-${document.getElementById('birthday-day').value}`);
     formData.append('gender', document.querySelector('input[name="gender"]:checked').value);
     formData.append('interestedGender', document.querySelector('input[name="interested-gender"]:checked').value);
     formData.append('relationshipIntent', document.querySelector('input[name="option"]:checked').value);
     formData.append('interest', document.getElementById('interest').value);
+    formData.append('moreInfo', document.getElementById('more-info').value);
 
     const photoInputs = document.querySelectorAll('.photo-upload input[type="file"]');
     photoInputs.forEach((input, index) => {
