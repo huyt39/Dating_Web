@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="nav-bar">
-        <img src="./assets/img/logo.svg" alt="" class="logo">
+        <img src="./assets/img/logo.png" alt="" class="logo">
     </div>
 
     <main>
@@ -40,8 +40,24 @@
                         <input type="text" id="birthday-year" placeholder="YYYY">
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <div class="gender-options">
+                        <div class="gender-option" id="gender-man" onclick="selectGender('man')">
+                            <input type="radio" name="gender" id="man" value="man">
+                            <label for="man">Man</label>
+                        </div>
+                        <div class="gender-option" id="gender-woman" onclick="selectGender('woman')">
+                            <input type="radio" name="gender" id="woman" value="woman">
+                            <label for="woman">Woman</label>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
             <div class="upload-photo">
+                <div class="label">Profile photos</div>
                 <div class="photo-grid">
                     <div class="photo-upload" id="photo-upload-0">
                         <input type="file" accept="image/*" class="file-input" onchange="openCropper(event, 0)">
@@ -89,6 +105,23 @@
         </div>
     </main>
 
+    <script>
+        function selectGender(gender) {
+    const manOption = document.getElementById('gender-man');
+    const womanOption = document.getElementById('gender-woman');
+    
+    if (gender === 'man') {
+        manOption.classList.add('selected');
+        womanOption.classList.remove('selected');
+        document.getElementById('man').checked = true;
+    } else {
+        womanOption.classList.add('selected');
+        manOption.classList.remove('selected');
+        document.getElementById('woman').checked = true;
+    }
+}
+
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
     <script src="./assets/js/test.js"></script>
 </body>
