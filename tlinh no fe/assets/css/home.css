@@ -1,0 +1,283 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Ẩn thanh cuộn ngang */
+}
+
+html{
+    font-size: 62.5%;
+}
+
+body{
+    font-family: 'Proxima Nova', sans-serif;
+    font-size: 1.6rem;
+}
+
+a{
+    text-decoration: none;
+}
+/* popup */
+.popup .logo{
+    width: 2.6rem;
+    height: auto;
+}
+
+.popup .title{
+    font-size: 3.4rem;
+    font-weight: 700;
+    margin: 1rem;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+.popup.active {
+    display: flex;
+    opacity: 1;
+}
+.popup-content {
+    background: white;
+    padding: 3rem 3rem;
+    border-radius: 10px;
+    width: 35rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transform: scale(0.8);
+    transition: transform 0.3s ease-in-out;
+}
+.popup.active .popup-content {
+    transform: scale(1);
+}
+.popup-content h2 {
+    margin-bottom: 20px;
+}
+.popup-content input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.popup-content button {
+    padding: 10px 20px;
+    border: none;
+    color: white;
+    border-radius: 999px;
+    cursor: pointer;
+    background-image: linear-gradient(90deg, #FD2B74 -7.15%, #FE5C3A 99.84%);
+    margin-top: 1rem;
+
+}
+.popup-content .close-btn {
+    background: #dc3545;
+    margin-top: 10px;
+}
+
+
+/*------------- Upper--------------- */
+/* background */
+.upper{
+    width: 100vw;
+    height: 100vh; 
+}
+.upper .back-ground{
+    position: absolute;
+    background-image: url(../img/744fe6d80266616aba687006b7d764ad.webp);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    width: 100vw;
+    height: 100vh; /* Chiều cao 100% khung nhìn */
+    z-index: -2; 
+}
+
+.upper .back-ground::after {
+    content: '';
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4));
+    z-index: -1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+}
+
+/* navbar */
+.nav-bar{
+    width: 94%;
+    margin: 2.29rem auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-bar .left{
+    display: flex;
+}
+
+.nav-bar ul{
+    display: flex;
+}
+
+.nav-bar .link{
+    color: #FFF;
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 143.3%; /* 3.2959rem */
+    margin-left: 2.9rem;
+}
+
+.nav-bar .action .signup{
+    color: #FFF;
+    font-size: 1.9rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 143.3%; /* 3.2959rem */
+}
+
+.action{
+    display: flex;
+    align-items: center;
+}
+
+.action .btn {
+    display: flex;
+    width: 13.8rem;
+    height: 4.2rem;
+    padding: 0.8 2rem; /* Chỉnh padding để phù hợp với kích thước */
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 10rem;
+    background: #FFF;
+    color: #21262E;
+    font-size: 1.9rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 143.3%;
+    overflow: hidden; /* Đảm bảo không có thanh cuộn */
+    white-space: nowrap; /* Đảm bảo nội dung không bị xuống dòng */
+    margin-left: 2rem;
+}
+
+/* hero */
+
+.hero {
+    text-align: center;
+    width: 100%; /* Ensures the hero section takes up full width */
+    /* margin-top: calc(50vh - 4rem); */
+    position: relative; /* Positioning for proper alignment */
+    top: 35%;
+    transform: translateY(-50%); /* Center vertically */
+}
+
+.hero .title {
+    color: #FFF;
+    font-size: 13rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 143.3%; /* 21.495rem */
+    letter-spacing: 0.075rem;
+    margin-bottom: 2rem; /* Thêm khoảng cách giữa tiêu đề và nút */
+}
+
+.hero .btn {
+    display: inline-flex; /* Sử dụng inline-flex để nút là một phần tử inline-block */
+    width: 19.4rem;
+    height: 5.1rem;
+    padding: 1rem 0;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 10rem;
+    color: #FFF;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 143.3%; /* 3.2959rem */
+    margin: 0 auto; /* Căn giữa nút */
+    text-decoration: none; /* Loại bỏ gạch chân mặc định của thẻ a */
+    background: linear-gradient(90deg, #FD2B74 -7.15%, #FE5C3A 99.84%);
+}
+/* ------------------------------------- */
+
+/* feedback list */
+.feedback-list{
+    display: flex;
+    margin: 3rem 6.06rem;
+}
+
+.feedback-item{
+    width: calc(33%-0.4rem);
+    padding: 5.1rem 4.3rem 5.1rem 2.3rem;
+    border-radius: 1rem;
+    border: 0.2px solid #B9B9B9;
+    background: #FFF;
+    box-shadow: 0px 4px 7px 0px rgba(0, 0, 0, 0.25);
+    margin-left: 2rem;
+}
+
+.feedback-item .title{
+    position: relative;
+    color: var(--xm-1, #21262E);
+    font-size: 2.1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 143.3%; /* 3.0093rem */
+    height: 4rem;
+}
+
+.feedback-item .title::after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 70%;
+    height: 0.1rem;
+    background: #656D78;
+}
+
+.feedback-item .desc{
+    color: var(--xm-2---text-ph, #656D78);
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 135.8%; /* 2.4444rem */
+    margin-top: 1.9rem;
+}
+
+/* footer */
+footer{
+    position: relative;
+    margin: 2rem 6.06rem;
+    height: 3rem;
+    text-align: right;
+}
+
+footer::before{
+    content: '';
+    height: 0.1rem;
+    width: 100%;
+    background: #D4D8DE;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+footer p {
+    height: 3rem;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
