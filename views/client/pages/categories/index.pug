@@ -4,14 +4,14 @@ include ../../mixins/box-head.pug
 block main
   .container.my-3
     .row
-        .col-12 
-            +box-head(pageTitle)
+      .col-12 
+        +box-head(pageTitle)
     
     .row 
-        each item in categories 
-            .col-6.mb-3
-                div(class="card")
-                    img(src=item.image) 
-                    div(class="card-body")
-                        h5(class="card-title") #{item.title}
-                        a(href=`/tours/${item.slug}` class="btn btn-primary") Chi tiết
+      each item in categories 
+        .col-6.mb-3
+          .card
+            img(src=item.image) 
+            .card-body
+              h5.card-title #{item.title}
+              a(href=`/partners/${item.slug}` class="btn btn-primary") Chi tiết

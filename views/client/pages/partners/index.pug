@@ -1,18 +1,17 @@
-extends ../../layouts/default.pug 
+extends ../../layouts/default.pug
 include ../../mixins/box-head.pug
 
-block main 
-    .container.my-3 
-        .row 
-            .col-12
-                +box-head(pageTitle)
-
-        .row  
-            each item in tours 
-                .col-6.mb-3
-                    div(class="card")
-                        img(src=item.image)
-                        div(class="card-body")
-                            h5(class="card-title") #{item.title}
-                            
-                            a(href=`/tours/detail/${item.slug}` class="btn btn-primary") Xem chi tiết
+block main
+  .container.my-3
+    .row
+      .col-12 
+        +box-head(pageTitle)
+    
+    .row 
+      each item in partners 
+        .col-6.mb-3
+          .card
+            img(src=item.image) 
+            .card-body
+              h5.card-title #{item.title}
+              a(href=`/partners/detail/${item.slug}` class="btn btn-primary") Chi tiết
