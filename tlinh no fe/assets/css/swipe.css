@@ -3,14 +3,15 @@
 }
 body {
 	background-color: #f5f7fa;
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Proxima Nova', sans-serif;
 	margin: 0;
 }
 .container {
 	display: flex;
 }
 .side {
-	min-width: 320px;
+	min-width: 260px;
+  max-width: 300px;
 	height: 200px;
 	background-color: #fff;
 	height: 100%;
@@ -35,8 +36,8 @@ body {
 }
 
 .side .header .avatar img {
-	width: 40px;
-	height: 40px;
+	width: 2rem;
+	height: 2rem;
 	border-radius: 40px;
 	border: 2px solid #fff;
 	box-shadow: 0 1px 8px 0 rgba(0, 20, 20, 0.2);
@@ -45,7 +46,7 @@ body {
 .side .header .title {
 	padding: 0 10px;
 	color: #fff;
-	font-size: 23px;
+	font-size: 1rem;
 }
 
 .side .menu ul {
@@ -66,21 +67,60 @@ body {
 	padding-bottom: 2px;
 }
 
+.matches{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.match {
+  width: 120px; /* Chiều rộng của ô vuông */
+  height: 120px; /* Chiều cao của ô vuông */
+  position: relative; /* Đặt vị trí tương đối để các thành phần con có thể sử dụng vị trí tuyệt đối */
+  margin: 10px;
+  overflow: hidden; /* Ẩn các nội dung vượt quá khung */
+  border-radius: 8px; /* Bo tròn góc */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Thêm bóng đổ cho ô */
+}
+
+.match .avatar img {
+  width: 100%; /* Chiều rộng bằng với khung cha */
+  height: 100%; /* Chiều cao bằng với khung cha */
+  object-fit: cover; /* Đảm bảo hình ảnh che phủ toàn bộ không gian mà không bị méo */
+}
+
+.match .user {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(to top, rgba(105,105,105,0.8), rgba(105,105,105,0));
+  color: white;
+  padding: 10px;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+
 .side .messages {
-	padding: 10px 20px;
-	display: flex;
+  max-width: 300px;
+	padding: 10px 0px 10px 10px;
 	align-items: center;
 	transition: 0.2s box-shadow;
 }
 
 .side .messages .avatar img {
-	width: 70px;
-	height: 70px;
+	width: 50px;
+	height: 50px;
 	border-radius: 70px;
 }
 
+.side .message {
+  display: flex;
+  align-items: center;
+  padding: 10px 0px;
+}
 .side .messages .user {
-	padding: 0 10px;
 	font-weight: 500;
 	letter-spacing: 0.5px;
 	font-size: 18px;
@@ -97,7 +137,7 @@ body {
 	opacity: 0.8;
 }
 
-.side .messages:hover {
+.side .message:hover {
 	box-shadow: 0 0 15px 0 rgba(43, 78, 78, 0.1);
 	border-right: 5px solid #fd5068;
 }
@@ -110,7 +150,6 @@ body {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100%;
   overflow: hidden;
   font-family: 'Nunito', sans-serif;
   background-color: #edeef3;
