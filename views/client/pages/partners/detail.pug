@@ -11,15 +11,15 @@ block main
             if(partnerDetail.images)
                 .inner-images
 
-                div(class="swiper mySwiper2")
+                div(class="swiper imagesMain")
                   div(class="swiper-wrapper")
                     each image in partnerDetail.images 
-                      div(class="swipper-slide")
+                      div(class="swiper-slide")
                         .inner-image 
                           img(src=image)
                   div(class="swiper-button-next")
                   div(class="swiper-button-prev")
-                div(class="swiper mySwiper")
+                div(class="swiper imagesThumb")
                   div(class="swiper-wrapper")
                     each image in partnerDetail.images 
                       div(class="swiper-slide")

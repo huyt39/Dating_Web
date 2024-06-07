@@ -107,65 +107,65 @@
   /*End categories*/
   
   /* partner-detail */
-  .tour-detail .inner-images .inner-image {
+  .partner-detail .inner-images .inner-image {
     width: 100%;
     aspect-ratio: 1/1;
     border: 1px solid #b5b5b5;
     border-radius: 5px;
   }
   
-  .tour-detail .inner-images .inner-image img {
+  .partner-detail .inner-images .inner-image img {
     width: 100%;
     height: 100%;
   }
   
-  .tour-detail .inner-title {
+  .partner-detail .inner-title {
     font-size: 20px;
     font-weight: 700;
     color: #c12026;
     margin-bottom: 10px;
   }
   
-  .tour-detail .inner-barcode {
+  .partner-detail .inner-barcode {
     margin-bottom: 10px;
   }
   
-  .tour-detail .inner-time-start {
+  .partner-detail .inner-time-start {
     margin-bottom: 10px;
   }
   
-  .tour-detail .inner-stock {
+  .partner-detail .inner-stock {
     margin-bottom: 10px;
   }
   
-  .tour-detail .inner-price-special {
+  .partner-detail .inner-price-special {
     font-size: 20px;
     font-weight: 700;
     color: #c12026;
     margin-bottom: 10px;
   }
   
-  .tour-detail .inner-price {
+  .partner-detail .inner-price {
     font-weight: 700;
     color: #3c3c3c;
     margin-bottom: 10px;
     text-decoration: line-through;
   }
   
-  .tour-detail .inner-percent {
+  .partner-detail .inner-percent {
     font-weight: 700;
     color: #3c3c3c;
     margin-bottom: 10px;
   }
   
-  .tour-detail .inner-infomation {
+  .partner-detail .inner-infomation {
     margin-top: 30px;
     border: 1px solid #b5b5b5;
     padding: 10px;
     border-radius: 5px;
   }
   
-  .tour-detail .inner-infomation .inner-label {
+  .partner-detail .inner-infomation .inner-label {
     font-size: 18px;
     font-weight: 700;
     color: #c12026;
@@ -174,13 +174,31 @@
     margin-bottom: 10px;
   }
   
-  .tour-detail .inner-infomation .inner-text {
+  .partner-detail .inner-infomation .inner-text {
     white-space: pre-line;
   }
   
-  .tour-detail .inner-infomation .inner-text img {
+  .partner-detail .inner-infomation .inner-text img {
     max-width: 100%;
     height: auto;
+
+    .swiper.imagesThumb {
+      height: 100px; /* Chiều cao cố định cho Swiper ở phía dưới */
+    }
+    
+    .swiper.imagesThumb .swiper-slide {
+      width: auto; /* Để các slide tự động điều chỉnh kích thước */
+      height: 100%; /* Chiều cao tối đa của các slide */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .swiper.imagesThumb .swiper-slide img {
+      width: auto;
+      height: 100%;
+      object-fit: cover; /* Đảm bảo hình ảnh được phủ đầy slide mà không bị méo */
+    }
   }
   /* End partner-detail */
   
