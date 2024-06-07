@@ -10,8 +10,7 @@ body {
 	display: flex;
 }
 .side {
-	min-width: 260px;
-  max-width: 300px;
+	width: 400px;
 	height: 200px;
 	background-color: #fff;
 	height: 100%;
@@ -74,8 +73,8 @@ body {
 }
 
 .match {
-  width: 120px; /* Chiều rộng của ô vuông */
-  height: 120px; /* Chiều cao của ô vuông */
+  aspect-ratio: 1 / 1;
+  width: calc(50% - 2rem); /* Hoặc bất kỳ kích thước mong muốn */
   position: relative; /* Đặt vị trí tương đối để các thành phần con có thể sử dụng vị trí tuyệt đối */
   margin: 10px;
   overflow: hidden; /* Ẩn các nội dung vượt quá khung */
@@ -101,9 +100,12 @@ body {
   box-sizing: border-box;
 }
 
+#messagesList{
+  display: block;
+}
 
 .side .messages {
-  max-width: 300px;
+  width: 100%;
 	padding: 10px 0px 10px 10px;
 	align-items: center;
 	transition: 0.2s box-shadow;
@@ -123,6 +125,7 @@ body {
 .side .messages .user {
 	font-weight: 500;
 	letter-spacing: 0.5px;
+  padding: 0 10px;
 	font-size: 18px;
 }
 

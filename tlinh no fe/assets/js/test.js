@@ -1,63 +1,33 @@
-let cropper;
-let currentPhotoIndex;
+document.addEventListener('DOMContentLoaded', function() {
+    const frame = document.getElementById('frame');
+    const data = [
+        { imgs: ['https://example.com/image1.jpg', 'https://example.com/image2.jpg'], name: 'Example 1', price: '20', distance: '2' },
+        { imgs: ['https://example.com/image3.jpg', 'https://example.com/image4.jpg'], name: 'Example 2', price: '25', distance: '5' }
+    ];
 
-function openCropper(event, index) {
-    currentPhotoIndex = index;
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            document.getElementById('cropperImage').src = e.target.result;
-            const modal = document.getElementById('cropperModal');
-            modal.style.display = 'block';
-            cropper = new Cropper(document.getElementById('cropperImage'), {
-                aspectRatio: 2 / 3, // Aspect ratio of the photo upload element (width:height = 2:3)
-                viewMode: 1,
-                autoCropArea: 1, // Ensures the crop box covers the entire image initially
-                ready() {
-                    cropper.setCropBoxData({
-                        width: cropper.getContainerData().width,
-                        height: cropper.getContainerData().height,
-                        left: 0,
-                        top: 0
-                    });
+    data.forEach(datum => appendCard(datum));
 
-                    document.getElementById('zoom-range').oninput = function() {
-                        cropper.zoomTo(parseFloat(this.value));
-                    };
-                },
-            });
-        };
-        reader.readAsDataURL(file);
+    function appendCard(data) {
+        const newCard = document.createElement('div');
+        newCard.className = 'swiper-container';
+        newCard.innerHTML = `
+            <div class="swiper-wrapper">
+                ${data.imgs.map(img => `<div class="swiper-slide" style="background-image: url('${img}');"></div>`).join('')}
+            </div>
+        `;
+        frame.appendChild(newCard);
+
+        const swiper = new Swiper(newCard, {
+            loop: true,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            }
+        });
+
+        const bottomDiv = document.createElement('div');
+        bottomDiv.className = 'bottom';
+        bottomDiv.innerHTML = `<div class="title">${data.name} - $${data.price}</div><div class="info">${data.distance} miles away</div>`;
+        newCard.appendChild(bottomDiv);
     }
-}
-
-function closeCropper() {
-    const modal = document.getElementById('cropperModal');
-    modal.style.display = 'none';
-    cropper.destroy();
-    cropper = null;
-}
-
-function cropImage() {
-    const canvas = cropper.getCroppedCanvas({
-        width: 100, // Width of the photo upload element
-        height: 150 // Height of the photo upload element
-    });
-    const imgElement = document.getElementById('photo' + currentPhotoIndex);
-    imgElement.src = canvas.toDataURL();
-    imgElement.classList.add('preview');
-    closeCropper();
-}
-
-function rotateImage() {
-    cropper.rotate(90);
-}
-
-// Close the modal when the user clicks outside of it
-window.onclick = function(event) {
-    const modal = document.getElementById('cropperModal');
-    if (event.target === modal) {
-        closeCropper();
-    }
-};
+});
