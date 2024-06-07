@@ -40,6 +40,21 @@ const cart = localStorage.getItem("cart"); //check xem co key "card" trong local
 if(!cart){ //neu chua co gio hang thi tao gio hang moi
     localStorage.setItem("cart",JSON.stringify([]));
 }
+
+//hien thi them so luong vao mini-cart:
+const showMiniCart=()=>{
+  const miniCart=document.querySelector("[mini-cart]");
+  if(miniCart){
+      const cart = JSON.parse(localStorage.getItem("cart"));
+      const totalQuantity=cart.reduce((sum, item)=>sum+item.quantity,0); //lap qua tung phan tu trong mang cart va tinh tong
+      miniCart.innerHTML=totalQuantity; //gan quantity cho cart
+  //sum ban dau duoc gan la 0, roi cong dan
+
+  console.log(totalQuantity);
+  }
+
+}
+showMiniCart();
 //Them partner vao list:
 const formAddToCart=document.querySelector("[form-add-to-cart]");
 if(formAddToCart){
@@ -65,6 +80,7 @@ if(formAddToCart){
             //luu vao local storage:
             localStorage.setItem("cart",JSON.stringify(cart)); //update item cart=gia tri cart moi
             alertAddCartSuccess();
+            showMiniCart();
         }
     });
 }
