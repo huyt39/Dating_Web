@@ -106,7 +106,7 @@
   }
   /*End categories*/
   
-  /* tour-detail */
+  /* partner-detail */
   .tour-detail .inner-images .inner-image {
     width: 100%;
     aspect-ratio: 1/1;
@@ -182,7 +182,7 @@
     max-width: 100%;
     height: auto;
   }
-  /* End tour-detail */
+  /* End partner-detail */
   
   /* Alert Add Cart Susscess */
   [alert-add-cart-susscess] {
