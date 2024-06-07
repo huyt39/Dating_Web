@@ -19,6 +19,22 @@ var imagesThumb = new Swiper(".imagesThumb", {
   });
 // End Slider Partner Detail 
 
+//in ra thong bao da them thanh cong
+const alertAddCartSuccess=()=>{
+  const elementAlert=document.querySelector("[alert-add-cart-success]");
+  if(elementAlert){
+      elementAlert.classList.remove("alert-hidden");
+      setTimeout(()=>{
+          elementAlert.classList.add("alert-hidden");
+      },3000); //sau 3s thi add lai class
+
+      const closeAlert=elementAlert.querySelector("[close-alert]");
+      closeAlert.addEventListener("click",()=>{
+          elementAlert.classList.add("alert-hidden");
+      });
+  }
+}
+
 //Carts
 const cart = localStorage.getItem("cart"); //check xem co key "card" trong localStorage khong
 if(!cart){ //neu chua co gio hang thi tao gio hang moi
@@ -31,7 +47,7 @@ if(formAddToCart){
         event.preventDefault(); //ngan chan hanh vi mac dinh la load lai trang khi submit
 
         const quantity=parseInt(event.target.elements.quantity.value); //chuyen chuoi thanh number
-        const tourId=parseInt(formAddToCart.getAttribute("partner-id"));
+        const partnerId=parseInt(formAddToCart.getAttribute("partner-id"));
 
         if(quantity>0 && partnerId){ //neu so luong>0 va ton tai partId moi cho them vao list
             const cart = JSON.parse(localStorage.getItem("cart"));
@@ -48,6 +64,7 @@ if(formAddToCart){
             }
             //luu vao local storage:
             localStorage.setItem("cart",JSON.stringify(cart)); //update item cart=gia tri cart moi
+            alertAddCartSuccess();
         }
     });
 }

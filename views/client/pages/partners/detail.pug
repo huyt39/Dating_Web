@@ -3,6 +3,10 @@ include ../../mixins/box-head.pug
 include ../../mixins/moment.pug
 
 block main
+  div(
+    class="alert alert-success alert-hidden"
+    alert-add-cart-success
+  ) Đã thêm vào danh sách ghép đôi! <span close-alert>x</span>
   .partner-detail
     .container.my-3
       .row
