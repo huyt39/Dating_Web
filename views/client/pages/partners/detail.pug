@@ -10,9 +10,21 @@ block main
         .col-6
             if(partnerDetail.images)
                 .inner-images
+
+                div(class="swiper mySwiper2")
+                  div(class="swiper-wrapper")
                     each image in partnerDetail.images 
-                        .inner-image
-                            img(src=image)
+                      div(class="swipper-slide")
+                        .inner-image 
+                          img(src=image)
+                  div(class="swiper-button-next")
+                  div(class="swiper-button-prev")
+                div(class="swiper mySwiper")
+                  div(class="swiper-wrapper")
+                    each image in partnerDetail.images 
+                      div(class="swiper-slide")
+                      .inner image 
+                        img(src=image)                
                     
                     
         .col-6
