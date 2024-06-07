@@ -1,255 +1,293 @@
+/* General body background color */
+body {
+  background-color: #f0f2f5; /* Màu nền của web */
+}
+
 /* Header */
 .header {
-    border-bottom: 1px solid #ddd;
-    padding: 10px 0;
-  }
-  
-  .header .inner-logo img {
-    max-height: 50px;
-    max-width: 100%;
-  }
-  .header .inner-menu >ul{
-    list-style: non;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    flex-wrap: wrap;
-  }
-  .header .inner-menu >ul >li {
-    margin-left: 20px;
-  }
-  /* end header */
+  background-color: #ffffff; /* Màu nền của header */
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
 
-  /* footer: */
-  .footer{
-    background: #ff4242;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-  }
-  /* end footer */
+.header .inner-logo img {
+  max-height: 50px;
+  max-width: 100%;
+}
 
-  .box-head{
-    margin-bottom: 30px;
+.header .inner-menu > ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.header .inner-menu > ul > li {
+  margin-left: 20px;
+}
+/* end header */
+
+/* Footer */
+.footer {
+  background-color: #ffffff; /* Màu nền của footer */
+  color: #333; /* Màu chữ của footer */
+  text-align: center;
+  padding: 10px;
+}
+/* end footer */
+
+.box-head {
+  margin-bottom: 30px;
+}
+
+.box-head .inner-title {
+  margin-bottom: 0;
+  font-size: 28px;
+  font-weight: 600;
+  color: #333; /* Màu chữ của tiêu đề box head */
+}
+/* end box-head */
+
+/* Form fields background and border styling */
+.form-group input[type="text"],
+.form-group input[type="email"] {
+  background-color: #ffffff; /* Màu nền của các ô nhập liệu */
+  border: 1px solid #ddd; /* Viền của các ô nhập liệu */
+  border-radius: 4px;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Categories */
+.card {
+  position: relative;
+  width: 250px;
+  height: fit-content;
+  transition: all 0.3s ease 0s;
+  background-color: #ffffff; /* Màu nền của các thẻ */
+  border: 1px solid #ddd; /* Viền của các thẻ */
+  border-radius: 4px;
+}
+
+.card .card-body {
+  position: relative;
+}
+
+.card img {
+  height: 180px;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: all 0.3s ease 0s;
+}
+
+.card .card-body a {
+  transition: all 0.3s ease 0s;
+}
+
+.card .card-body a:hover {
+  color: #333;
+  background: white;
+  border: #333 1px solid;
+  transition: all 0.3s ease 0s;
+}
+
+.swiper {
+  max-width: 800px;
+  max-height: 500px;
+  width: 100%;
+  height: 100%;
+  background: rgba(128, 128, 128, 0.212); /* Màu nền của swiper */
+  margin-bottom: 20px;
+}
+
+.swiper-category .swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #e0e0e0; /* Màu nền của swiper slide */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 15% 100%;
+}
+/* End categories */
+
+/* Partner detail */
+.partner-detail .inner-images .inner-image {
+  width: 100%;
+  aspect-ratio: 1/1;
+  border: 1px solid #b5b5b5;
+  border-radius: 5px;
+}
+
+.partner-detail .inner-images .inner-image img {
+  width: 100%;
+  height: 100%;
+}
+
+.partner-detail .inner-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.partner-detail .inner-barcode {
+  margin-bottom: 10px;
+}
+
+.partner-detail .inner-time-start {
+  margin-bottom: 10px;
+}
+
+.partner-detail .inner-stock {
+  margin-bottom: 10px;
+}
+
+.partner-detail .inner-price-special {
+  font-size: 20px;
+  font-weight: 700;
+  color: #c12026;
+  margin-bottom: 10px;
+}
+
+.partner-detail .inner-price {
+  font-weight: 700;
+  color: #3c3c3c;
+  margin-bottom: 10px;
+  text-decoration: line-through;
+}
+
+.partner-detail .inner-percent {
+  font-weight: 700;
+  color: #3c3c3c;
+  margin-bottom: 10px;
+}
+
+.partner-detail .inner-infomation {
+  margin-top: 30px;
+  border: 1px solid #b5b5b5;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #ffffff; /* Màu nền của phần thông tin chi tiết đối tác */
+}
+
+.partner-detail .inner-infomation .inner-label {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+  border-bottom: 1px solid #b5b5b5;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.partner-detail .inner-infomation .inner-text {
+  white-space: pre-line;
+}
+
+.partner-detail .inner-infomation .inner-text img {
+  max-width: 100%;
+  height: auto;
+
+  .swiper.imagesThumb {
+      height: 100px; /* Chiều cao cố định cho Swiper ở phía dưới */
   }
 
-  .box-head .inner-title{
-    margin-bottom: 0;
-    font-size: 28px;
-    font-weight: 600;
-    color: green;
+  .swiper.imagesThumb .swiper-slide {
+      width: auto; /* Để các slide tự động điều chỉnh kích thước */
+      height: 100%; /* Chiều cao tối đa của các slide */
+      display: flex;
+      align-items: center;
+      justify-content: center;
   }
-  /* end box-head */
 
-  /*Categories*/
-.card{
-    position: relative;
-    width: 250px;
-    height: fit-content;
-    transition: all 0.3s ease 0s;
+  .swiper.imagesThumb .swiper-slide img {
+      width: auto;
+      height: 100%;
+      object-fit: cover; /* Đảm bảo hình ảnh được phủ đầy slide mà không bị méo */
   }
-  
-  .card .card-body{
-    position: relative;
-  }
-  
-  .card img{
-    height: 180px;
-  }
-  
-  .card:hover{
-    transform: scale(1.2);
-    -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
-    -moz-box-shadow: 0px 5px 40px -10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    transition: all 0.3s ease 0s;
-    z-index: 10;
-  }
-  
-  .card .card-body a{
-    transition: all 0.3s ease 0s;
-  }
-  
-  .card .card-body a:hover{
-    color: #333;
-    background: white;
-    border: #333 1px solid;
-    transition: all 0.3s ease 0s;
-  }
-  
-  .swiper {
-    max-width: 800px;
-    max-height: 500px;
-    width: 100%;
-    height: 100%;
-    background: rgba(128, 128, 128, 0.212);
-    margin-bottom: 20px;
-  }
-  
-  .swiper-category .swiper-slide {
-    text-align: center;
-    font-size: 18px;
-    background: #e0e0e0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .swiper-slide img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 15% 100%;
-  }
-  /*End categories*/
-  
-  /* tour-detail */
-  .tour-detail .inner-images .inner-image {
-    width: 100%;
-    aspect-ratio: 1/1;
-    border: 1px solid #b5b5b5;
-    border-radius: 5px;
-  }
-  
-  .tour-detail .inner-images .inner-image img {
-    width: 100%;
-    height: 100%;
-  }
-  
-  .tour-detail .inner-title {
-    font-size: 20px;
-    font-weight: 700;
-    color: #c12026;
-    margin-bottom: 10px;
-  }
-  
-  .tour-detail .inner-barcode {
-    margin-bottom: 10px;
-  }
-  
-  .tour-detail .inner-time-start {
-    margin-bottom: 10px;
-  }
-  
-  .tour-detail .inner-stock {
-    margin-bottom: 10px;
-  }
-  
-  .tour-detail .inner-price-special {
-    font-size: 20px;
-    font-weight: 700;
-    color: #c12026;
-    margin-bottom: 10px;
-  }
-  
-  .tour-detail .inner-price {
-    font-weight: 700;
-    color: #3c3c3c;
-    margin-bottom: 10px;
-    text-decoration: line-through;
-  }
-  
-  .tour-detail .inner-percent {
-    font-weight: 700;
-    color: #3c3c3c;
-    margin-bottom: 10px;
-  }
-  
-  .tour-detail .inner-infomation {
-    margin-top: 30px;
-    border: 1px solid #b5b5b5;
-    padding: 10px;
-    border-radius: 5px;
-  }
-  
-  .tour-detail .inner-infomation .inner-label {
-    font-size: 18px;
-    font-weight: 700;
-    color: #c12026;
-    border-bottom: 1px solid #b5b5b5;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
-  }
-  
-  .tour-detail .inner-infomation .inner-text {
-    white-space: pre-line;
-  }
-  
-  .tour-detail .inner-infomation .inner-text img {
-    max-width: 100%;
-    height: auto;
-  }
-  /* End tour-detail */
-  
-  /* Alert Add Cart Susscess */
-  [alert-add-cart-susscess] {
-    position: fixed;
-    top: 70px;
-    right: 15px;
-    z-index: 9999;
-  }
-  
-  [alert-add-cart-susscess].alert-hidden {
-    animation-name: alert-hidden;
-    animation-fill-mode: both;
-  }
-  
-  @keyframes alert-hidden {
-    from {
+
+}
+/* End partner-detail */
+
+/* Alert Add Cart Success */
+[alert-add-cart-susscess] {
+  position: fixed;
+  top: 70px;
+  right: 15px;
+  z-index: 9999;
+}
+
+[alert-add-cart-susscess].alert-hidden {
+  animation-name: alert-hidden;
+  animation-fill-mode: both;
+}
+
+@keyframes alert-hidden {
+  from {
       right: 15px;
-    }
-    to {
+  }
+  to {
       right: -100%;
       display: none;
-    }
   }
-  
-  [alert-add-cart-susscess] [close-alert] {
-    background: #ffffffc4;
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    line-height: 24px;
-    text-align: center;
-    font-weight: 600;
-    border-radius: 50%;
-    cursor: pointer;
-  }
-  /* End Alert Add Cart Susscess */
-  
-  /*Cart page*/
-  .table {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
-  }
-  
-  .table a{
-    text-decoration: none;
-  }
-  
-  button[btn-delete]:hover{
-    color: #333;
-    background: white;
-    border: #333 1px solid;
-    transition: all 0.2s ease 0s;
-  }
-  
-  .form-group button{
-    transition: all 0.4s ease 0s;
-  }
-  
-  .form-group button:hover{
-    letter-spacing: 10px;
-    -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.3);
-    -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.3);
-    box-shadow: 5px 40px -10px rgba(0,0,0,0.3);
-    transition: all 0.4s ease 0s;
-  }
-  /*End cart page*/
-  
-  #map { 
-    height: 538.4px; 
-    width: 538.4px;
-  }
+}
+
+[alert-add-cart-susscess] [close-alert] {
+  background: #ffffffc4;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  font-weight: 600;
+  border-radius: 50%;
+  cursor: pointer;
+}
+/* End Alert Add Cart Success */
+
+/* Cart page */
+.table {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+  background-color: #ffffff; /* Màu nền của bảng trong trang giỏ hàng */
+}
+
+.table a {
+  text-decoration: none;
+}
+
+button[btn-delete]:hover {
+  color: #333;
+  background: white;
+  border: #333 1px solid;
+  transition: all 0.2s ease 0s;
+}
+
+.form-group button {
+  transition: all 0.4s ease 0s;
+}
+
+.form-group button:hover {
+  letter-spacing: 10px;
+  box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s ease 0s;
+}
+/* End cart page */
+
+#map {
+  height: 538.4px;
+  width: 538.4px;
+}

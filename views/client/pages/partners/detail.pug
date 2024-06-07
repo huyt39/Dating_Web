@@ -2,27 +2,35 @@ extends ../../layouts/default.pug
 include ../../mixins/box-head.pug
 include ../../mixins/moment.pug
 
-
 block main
+  div(
+    class="alert alert-success alert-hidden"
+    alert-add-cart-success
+  ) Đã thêm vào danh sách ghép đôi! <span close-alert>x</span>
   .partner-detail
     .container.my-3
       .row
         .col-6
-            if(partnerDetail.images)
-                .inner-images
-                    each image in partnerDetail.images 
-                        .inner-image
-                            img(src=image)
-                    
-                    
+          if(partnerDetail.images)
+            .inner-images
+              div(class="swiper imagesMain")
+                div(class="swiper-wrapper")
+                  each image in partnerDetail.images
+                    div(class="swiper-slide")
+                      .inner-image 
+                        img(src=image)
+                div(class="swiper-button-next")
+                div(class="swiper-button-prev")
+              div(class="swiper imagesThumb")
+                div(class="swiper-wrapper")
+                  each image in partnerDetail.images
+                    div(class="swiper-slide")
+                      .inner-image
+                        img(src=image)
         .col-6
           .inner-title #{partnerDetail.title}
-
           .inner-barcode
-            <i class="fa-solid fa-barcode"></i> Mã partner: #{partnerDetail.code}
-
-
-
+            i.fa-solid.fa-barcode Mã partner: #{partnerDetail.code}
           form(
             form-add-to-cart
             tour-id=partnerDetail.id
@@ -39,13 +47,8 @@ block main
               type="submit"
               class="btn btn-success btn-block"
             ) Ghép đôi
-      
-      
       .row
         .col-12
           .inner-infomation
             .inner-label Thông tin người dùng
-            .inner-text
-              | !{partnerDetail.information}
-
-        
+            .inner-text !{partnerDetail.information}

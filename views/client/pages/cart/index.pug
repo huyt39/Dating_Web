@@ -1,0 +1,60 @@
+extends ../../layouts/default.pug
+include ../../mixins/box-head.pug
+
+block main
+  .container.my-3
+    .row
+      .col-12
+        +box-head(pageTitle)
+
+
+    .row
+      .col-12
+        table(class="table table-bordered" table-cart)
+          thead
+            tr
+              th STT
+              th Ảnh
+              th Tiêu đề
+              th Số lượng
+              th Hành động
+          tbody
+
+     
+
+    .row
+      .col-12
+        +box-head("Thông tin khách hàng")
+
+        form(form-order)
+          div(class="form-group")
+            label(for="fullName") Họ tên
+            input(
+              type="text"
+              class="form-control"
+              id="fullName"
+              name="fullName"
+              required
+            )
+          div(class="form-group")
+            label(for="phone") Số điện thoại
+            input(
+              type="text"
+              class="form-control"
+              id="phone"
+              name="phone"
+              required
+            )
+          div(class="form-group")
+            label(for="note") Ghi chú
+            textarea(
+              class="form-control"
+              id="note"
+              name="note"
+              rows="2"
+            )
+          div(class="form-group")
+            button(
+              type="submit"
+              class="btn btn-success btn-block"
+            ) GHÉP ĐÔI
