@@ -230,7 +230,7 @@ body {
 }
 .buttons {
   position: absolute;
-  bottom: 14%;
+  top: 80%;
   display: flex;
   width: 200px;
   justify-content: space-between;
