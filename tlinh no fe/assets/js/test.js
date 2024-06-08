@@ -39,9 +39,11 @@ function updateCardImage(card, images, currentIndex) {
 
 function showFeedback(card, feedbackType) {
     const feedbackElement = card.querySelector(`.feedback.${feedbackType}`);
+    feedbackElement.style.display = 'block';  // Hiển thị phần tử phản hồi
     feedbackElement.style.opacity = 1;
     setTimeout(() => {
         feedbackElement.style.opacity = 0;
+        feedbackElement.style.display = 'none';  // Ẩn phần tử phản hồi sau khi hiển thị
     }, 1000);
 }
 
@@ -62,13 +64,20 @@ function initCard(card, user) {
         const yMulti = event.deltaY / 80;
         const rotate = xMulti * yMulti;
         card.style.transform = `translate(${event.deltaX}px, ${event.deltaY}px) rotate(${rotate}deg)`;
+
+        // Hiển thị phản hồi khi đang quẹt
+        if (event.deltaX > 0) {
+            showFeedback(card, 'like');
+        } else {
+            showFeedback(card, 'nope');
+        }
     });
 
     hammertime.on('panend', function (event) {
         card.style.transition = 'transform 0.3s ease';
         const moveOutWidth = document.body.clientWidth;
         const threshold = moveOutWidth / 4;
-    
+
         if (Math.abs(event.deltaX) > threshold) {
             const direction = event.deltaX > 0 ? 1 : -1;
             card.style.transform = `translate(${direction * moveOutWidth}px, ${event.deltaY}px) rotate(${direction * 30}deg)`;
@@ -79,16 +88,14 @@ function initCard(card, user) {
                 requestAnimationFrame(() => {
                     showNextCard();
                 });
-            }, 300); // Đảm bảo thẻ hiện tại được xoá sau khi chuyển đổi hoàn tất
+            }, 300);
             showFeedback(card, direction > 0 ? 'like' : 'nope');
         } else {
             card.style.transform = '';
         }
     });
-    
-    
-    
 }
+
 
 async function initialize() {
     const users = await fetchUserData();
@@ -114,7 +121,7 @@ function showNextCard() {
                 if (remainingCards.length > 0) {
                     remainingCards[remainingCards.length - 1].classList.remove('removed');
                 }
-            }, 100); // Đảm bảo thẻ hiện tại được xoá sau khi chuyển đổi hoàn tất
+            }, 300); // Đảm bảo thẻ hiện tại được xoá sau khi chuyển đổi hoàn tất
         }
     }
 }
@@ -136,7 +143,7 @@ function handleButtonAction(action) {
                 requestAnimationFrame(() => {
                     showNextCard();
                 });
-            }, 100); // Đảm bảo thẻ hiện tại được xoá sau khi chuyển đổi hoàn tất
+            }, 300); // Đảm bảo thẻ hiện tại được xoá sau khi chuyển đổi hoàn tất
             showFeedback(currentCard, action);
         }
     }
