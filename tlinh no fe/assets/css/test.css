@@ -7,35 +7,138 @@ body {
   height: 100vh;
   overflow: hidden;
 }
-.sidebar {
-  width: 300px;
-  background-color: #1c1c1c;
+
+.side {
+  color: #fff;
+	width: 340px;
+	height: 200px;
+	background-color: #000;
+	height: 100%;
+	min-height: 100vh;
+	border-right: 1px solid #6b6a6a;
+  z-index: 20;
+}
+
+.side .header {
+	background: linear-gradient(262deg, #ff7854, #fd267d);
+	width: 100%;
+	height: 80px;
+	box-shadow: 0 1px 8px 0 rgba(0, 20, 20, 0.2);
+	display: flex;
+	align-items: center;
+}
+
+.side .header .avatar img {
+	width: 2rem;
+	height: 2rem;
+	border-radius: 40px;
+	border: 2px solid #fff;
+	box-shadow: 0 1px 8px 0 rgba(0, 20, 20, 0.2);
+  margin-left: 20px;
+}
+
+.side .header .title {
+	padding: 0 10px;
+	color: #fff;
+	font-size: 15px;
+  font-weight: 600;
+}
+
+.side .menu ul {
+	display: flex;
+	padding: 0 20px;
+}
+
+.side .menu ul li {
+	list-style: none;
+	margin: 0 10px;
+	font-weight: 700;
+	font-size: 15px;
+	letter-spacing: 0.5px;
+}
+
+.side .menu .active {
+	border-bottom: 3px solid #fd5068;
+	padding-bottom: 2px;
+}
+
+.matches{
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
-.sidebar img {
-  width: 80px;
-  border-radius: 50%;
-  margin-bottom: 20px;
+
+.match {
+  aspect-ratio: 1 / 1;
+  width: calc(50% - 2rem); /* Hoặc bất kỳ kích thước mong muốn */
+  position: relative; /* Đặt vị trí tương đối để các thành phần con có thể sử dụng vị trí tuyệt đối */
+  margin: 10px;
+  overflow: hidden; /* Ẩn các nội dung vượt quá khung */
+  border-radius: 8px; /* Bo tròn góc */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Thêm bóng đổ cho ô */
 }
-.sidebar h2 {
-  margin: 0;
-  margin-bottom: 20px;
+
+.match .avatar img {
+  width: 100%; /* Chiều rộng bằng với khung cha */
+  height: 100%; /* Chiều cao bằng với khung cha */
+  object-fit: cover; /* Đảm bảo hình ảnh che phủ toàn bộ không gian mà không bị méo */
 }
-.sidebar .menu {
+
+.match .user {
+  position: absolute;
+  bottom: 0;
+  left: 0;
   width: 100%;
+  background: linear-gradient(to top, rgba(105,105,105,0.8), rgba(105,105,105,0));
+  color: white;
+  padding: 10px;
+  text-align: left;
+  box-sizing: border-box;
 }
-.sidebar .menu div {
-  padding: 15px;
-  background: #333;
-  margin-bottom: 10px;
-  text-align: center;
-  cursor: pointer;
+
+#messagesList{
+  display: block;
 }
-.sidebar .menu div.active {
-  background: #ff4466;
+
+.side .messages {
+  width: 100%;
+	padding: 10px 0px 10px 10px;
+	align-items: center;
+	transition: 0.2s box-shadow;
+}
+
+.side .messages .avatar img {
+	width: 50px;
+	height: 50px;
+	border-radius: 70px;
+}
+
+.side .message {
+  display: flex;
+  align-items: center;
+  padding: 10px 0px;
+}
+.side .messages .user {
+	font-weight: 500;
+	letter-spacing: 0.5px;
+  padding: 0 10px;
+	font-size: 18px;
+}
+
+.side .messages .text {
+	width: 200px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding: 0 10px;
+	font-weight: 300;
+	font-size: 15px;
+	opacity: 0.8;
+}
+
+.side .message:hover {
+	box-shadow: 0 0 15px 0 rgba(43, 78, 78, 0.1);
+	border-right: 5px solid #fd5068;
 }
 .main {
   flex: 1;
@@ -46,6 +149,7 @@ body {
 }
 .tinder--card {
   position: absolute;
+  top: 10%;
   width: 90%;
   max-width: 400px;
   height: 70%;
@@ -63,11 +167,38 @@ body {
   overflow: hidden;
 }
 .tinder--card img {
+  position: absolute;
+  top: 0;
   width: 100%;
   height: auto;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
+  z-index: -2;
 }
+
+
+
+.tinder--card .info {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: #fff; /* Đổi màu chữ để dễ đọc trên nền gradient */
+}
+
+.tinder--card .info::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40%; /* Chiếm 30% chiều cao từ dưới đáy */
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+  z-index: -1; /* Để gradient nằm dưới nội dung */
+}
+
 .tinder--card h3 {
   margin: 20px 0 0;
   padding: 0 20px;
@@ -85,7 +216,7 @@ body {
   flex-direction: column;
 }
 .nav-buttons button {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0);
   border: none;
   color: #fff;
   font-size: 24px;
@@ -96,11 +227,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 .buttons {
   position: absolute;
-  bottom: 50px;
+  bottom: 14%;
   display: flex;
   width: 200px;
   justify-content: space-between;
@@ -111,11 +241,22 @@ body {
   cursor: pointer;
   font-size: 24px;
 }
+
 .buttons button.nope {
+  z-index: 3;
+  font-size: 40px;
   color: #ff4466;
+  border: 1px #ff4466 solid;
+  border-radius: 999px;
+  padding: 5px 18px; /* padding-top-bottom: 8px, padding-left-right: 12px */
 }
 .buttons button.like {
+  z-index: 3;
+  font-size: 40px;
   color: #4cc9f0;
+  border: 1px #4cc9f0 solid;
+  border-radius: 999px;
+  padding: 8px 12px; /* padding-top-bottom: 8px, padding-left-right: 12px */
 }
 .feedback {
   position: absolute;

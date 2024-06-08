@@ -17,14 +17,16 @@ function createCard(user, index) {
     card.classList.add('tinder--card');
     card.innerHTML = `
         <img src="${user.images[0]}" alt="Profile Picture">
-        <h3>${user.name}, ${user.age}</h3>
-        <p>${user.location}</p>
-        <p>${user.distance}</p>
-        <div class="nav-buttons">
-            <button class="next"><i class="fas fa-chevron-right"></i></button>
+        <div class="info">
+            <h3>${user.name}, ${user.age}</h3>
+            <p>${user.location}</p>
+            <p>${user.distance}</p>
+            <div class="nav-buttons">
+                <button class="next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="feedback like">LIKE</div>
+            <div class="feedback nope">NOPE</div>
         </div>
-        <div class="feedback like">LIKE</div>
-        <div class="feedback nope">NOPE</div>
     `;
     card.dataset.index = index;
     return card;
@@ -60,32 +62,32 @@ function initCard(card, user) {
         const yMulti = event.deltaY / 80;
         const rotate = xMulti * yMulti;
         card.style.transform = `translate(${event.deltaX}px, ${event.deltaY}px) rotate(${rotate}deg)`;
-
-        if (event.deltaX > 0) {
-            showFeedback(card, 'like');
-        } else {
-            showFeedback(card, 'nope');
-        }
     });
 
     hammertime.on('panend', function (event) {
         card.style.transition = 'transform 0.3s ease';
         const moveOutWidth = document.body.clientWidth;
         const threshold = moveOutWidth / 4;
-
+    
         if (Math.abs(event.deltaX) > threshold) {
             const direction = event.deltaX > 0 ? 1 : -1;
             card.style.transform = `translate(${direction * moveOutWidth}px, ${event.deltaY}px) rotate(${direction * 30}deg)`;
             card.style.opacity = 0;
             setTimeout(() => {
+                console.log(direction > 0 ? 'like' : 'nope');
                 card.remove();
-                showNextCard();
-            }, 300);
+                requestAnimationFrame(() => {
+                    showNextCard();
+                });
+            }, 300); // Đảm bảo thẻ hiện tại được xoá sau khi chuyển đổi hoàn tất
             showFeedback(card, direction > 0 ? 'like' : 'nope');
         } else {
             card.style.transform = '';
         }
     });
+    
+    
+    
 }
 
 async function initialize() {
@@ -103,42 +105,63 @@ async function initialize() {
 
 function showNextCard() {
     const cards = document.querySelectorAll('.tinder--card');
-    const currentCard = document.querySelector('.tinder--card:not(.removed)');
-    if (currentCard) {
-        currentCard.classList.add('removed');
-        setTimeout(() => {
-            currentCard.remove();
-            if (cards.length > 1) {
-                cards[1].classList.remove('removed');
-            }
-        }, 300);
+    if (cards.length > 0) {
+        const currentCard = cards[cards.length - 1];
+        if (currentCard) {
+            currentCard.classList.add('removed');
+            setTimeout(() => {
+                const remainingCards = document.querySelectorAll('.tinder--card');
+                if (remainingCards.length > 0) {
+                    remainingCards[remainingCards.length - 1].classList.remove('removed');
+                }
+            }, 100); // Đảm bảo thẻ hiện tại được xoá sau khi chuyển đổi hoàn tất
+        }
     }
 }
 
-document.querySelector('.nope').addEventListener('click', () => {
-    const currentCard = document.querySelector('.tinder--card:not(.removed)');
-    if (currentCard) {
-        currentCard.style.transform = `translate(-${document.body.clientWidth}px, 0) rotate(-30deg)`;
-        currentCard.style.opacity = 0;
-        setTimeout(() => {
-            currentCard.remove();
-            showNextCard();
-        }, 300);
-        showFeedback(currentCard, 'nope');
-    }
-});
 
-document.querySelector('.like').addEventListener('click', () => {
-    const currentCard = document.querySelector('.tinder--card:not(.removed)');
-    if (currentCard) {
-        currentCard.style.transform = `translate(${document.body.clientWidth}px, 0) rotate(30deg)`;
-        currentCard.style.opacity = 0;
-        setTimeout(() => {
-            currentCard.remove();
-            showNextCard();
-        }, 300);
-        showFeedback(currentCard, 'like');
+
+function handleButtonAction(action) {
+    const cards = document.querySelectorAll('.tinder--card');
+    if (cards.length > 0) {
+        const currentCard = cards[cards.length - 1];
+        if (currentCard) {
+            const direction = action === 'like' ? 1 : -1;
+            currentCard.style.transition = 'transform 0.3s ease';
+            currentCard.style.transform = `translate(${direction * document.body.clientWidth}px, 0) rotate(${direction * 30}deg)`;
+            currentCard.style.opacity = 0;
+            setTimeout(() => {
+                console.log(action);
+                currentCard.remove();
+                requestAnimationFrame(() => {
+                    showNextCard();
+                });
+            }, 100); // Đảm bảo thẻ hiện tại được xoá sau khi chuyển đổi hoàn tất
+            showFeedback(currentCard, action);
+        }
     }
-});
+}
+
+
+
+
+
+
+document.querySelector('.nope').addEventListener('click', () => handleButtonAction('nope'));
+document.querySelector('.like').addEventListener('click', () => handleButtonAction('like'));
 
 initialize();
+
+document.getElementById('matchesTab').addEventListener('click', function() {
+    document.getElementById('matchesList').style.display = 'flex';
+    document.getElementById('messagesList').style.display = 'none';
+    this.classList.add('active');
+    document.getElementById('messagesTab').classList.remove('active');
+});
+
+document.getElementById('messagesTab').addEventListener('click', function() {
+    document.getElementById('matchesList').style.display = 'none';
+    document.getElementById('messagesList').style.display = 'flex';
+    this.classList.add('active');
+    document.getElementById('matchesTab').classList.remove('active');
+});

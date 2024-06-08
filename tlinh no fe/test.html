@@ -8,12 +8,60 @@
     <link rel="stylesheet" href="./assets/css/test.css">
 </head>
 <body>
-    <div class="sidebar">
-        <img src="https://via.placeholder.com/80" alt="Profile">
-        <h2>Linh Nguyễn</h2>
+    <div class="side">
+        <div class="header">
+            <div class="avatar">
+                <img src="./assets/img/283a7ffd-768f-41d2-84c2-c5ce011fdeda.jpg" alt="Avatar">
+            </div>
+            <div class="title">Linh Nguyễn</div>
+        </div>
         <div class="menu">
-            <div class="active">Matches</div>
-            <div>Messages</div>
+            <ul>
+                <li class="active" id="matchesTab">Matches</li>
+                <li id="messagesTab">Messages</li>
+            </ul>
+        </div>
+        <div class="content-section" id="matchesList">
+            <div class="matches">
+                <div class="match">
+                    <div class="avatar"><img src="./assets/img/283a7ffd-768f-41d2-84c2-c5ce011fdeda.jpg" alt="Kevin"></div>
+                    <div class="user">Kevin</div>
+                </div>
+                <div class="match">
+                    <div class="avatar"><img src="avatar2.jpg" alt="Jared"></div>
+                    <div class="user">Jared</div>
+                </div>
+                <div class="match">
+                    <div class="avatar"><img src="avatar2.jpg" alt="Jared"></div>
+                    <div class="user">Jared</div>
+                </div>
+                <div class="match">
+                    <div class="avatar"><img src="avatar2.jpg" alt="Jared"></div>
+                    <div class="user">Jared</div>
+                </div>
+                <!-- Thêm các mục Matches khác tại đây -->
+            </div>
+        </div>
+        <div class="content-section" id="messagesList" style="display: none;">
+            <div class="messages">
+                <div class="message">
+                    
+                    <div class="avatar"><img src="./assets/img/283a7ffd-768f-41d2-84c2-c5ce011fdeda.jpg" alt="David"></div>
+                    <div class="info">
+                        <div class="user">David</div>
+                        <div class="text">You have the cutest smile I've ever seen...</div>
+                    </div>
+
+                </div>
+                <div class="message">
+                    <div class="avatar"><img src="./assets/img/back.png" alt="Hank"></div>
+                    <div class="info">
+                        <div class="user">Hank</div>
+                        <div class="text">What are you up to this weekend...</div>
+                    </div>
+                </div>
+                <!-- Thêm các tin nhắn khác tại đây -->
+            </div>
         </div>
     </div>
     <div class="main" id="main">
