@@ -3,6 +3,544 @@ include ../../mixins/box-head.pug
 
 block main
   .container.my-3
-    .row
-      .col-12
-        +box-head(pageTitle)
+    
+
+    h1.title Create Account
+
+    .info
+      .field
+        .form-group
+          label(for="name") Name
+          input(type="text" id="name" placeholder="Name")
+        .form-group
+          label(for="email") Email
+          input(type="email" id="email" placeholder="abc@gmail.com")
+        .form-group
+          label(for="major") Major
+          input(type="text" id="major" placeholder="CNTT, Dệt may, ...")
+        .form-group.birthday-group
+          .linh
+            label(for="birthday-month") Month
+            input(type="text" id="birthday-month" placeholder="MM")
+          .linh
+            label(for="birthday-day") Day
+            input(type="text" id="birthday-day" placeholder="DD")
+          .linh
+            label(for="birthday-year") Year
+            input(type="text" id="birthday-year" placeholder="YYYY")
+        .form-group
+          label(for="gender") Gender
+          .gender-options
+            .gender-option#gender-man(onclick="selectGender('man')")
+              input(type="radio" name="gender" id="man" value="man")
+              label(for="man") Man
+            .gender-option#gender-woman(onclick="selectGender('woman')")
+              input(type="radio" name="gender" id="woman" value="woman")
+              label(for="woman") Woman
+
+      .upload-photo
+        .label Profile photos
+        .photo-grid
+          each index in [0, 1, 2]
+            .photo-upload(id=`photo-upload-${index}`)
+              input(type="file" accept="image/*" class="file-input" onchange=`openCropper(event, ${index})`)
+              img(src="plus-icon.png" alt="Upload" class="upload-icon" id=`photo${index}`)
+              i.fas.fa-plus-circle.upload-icon
+        p Upload 2 photos to start. Add 3 to make your profile stand out.
+
+    #cropperModal.modal
+      .modal-content
+        span.close(onclick="closeCropper()") &times;
+        h2 Adjust Photo
+        .crop-container
+          img#cropperImage(src="" alt="Cropper")
+        .crop-controls
+          input#zoom-range(type="range" min="1" max="3" step="0.1")
+          button(onclick="rotateImage()") Rotate
+        button.choose-button(onclick="cropImage()") Choose
+        button.cancel-button(onclick="closeCropper()") Cancel
+
+    .sign
+      button#signUpButton.sign-up(disabled) Sign Up
+
+  //- Nhúng CSS trực tiếp
+  style.
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden; /* Ẩn thanh cuộn ngang */
+    }
+
+    html {
+        font-size: 62.5%;
+    }
+
+    body {
+        font-family: 'Proxima Nova', sans-serif;
+        font-size: 1.6rem;
+        background-color: rgba(17,20,24,255);
+        color: white;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    /* nav */
+    .nav-bar {
+        height: 9.6rem;
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+    .nav-bar::after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        content: '';
+        width: 100%;
+        height: 0.06rem;
+        background-color: #333;
+    }
+
+    .nav-bar .logo {
+        margin-left: 3rem;
+        width: 15rem;
+        height: auto;
+    }
+
+    /* main */
+    main {
+        width: 65%;
+        margin: 3rem auto;
+    }
+
+    main .title {
+        text-align: center;
+    }
+
+    /* info */
+    main .info {
+        margin-top: 3rem;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .info .field {
+        width: 56%;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+    .form-group input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #333;
+        border-radius: 8px;
+        background-color: black;
+        color: #fff;
+    }
+    .form-group.birthday-group {
+        display: flex;
+    }
+    .form-group.birthday-group input {
+        width: calc(100% - 4rem);
+    }
+
+    .gender-options {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .gender-option {
+        display: flex;
+        min-width: 15rem;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #444;
+        border-radius: 25px;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        color: white;
+    }
+
+    .gender-option:hover {
+        background-color: #333;
+    }
+
+    .gender-option input {
+        display: none;
+    }
+
+    .gender-option label {
+        cursor: pointer;
+        margin: 0;
+    }
+
+    .gender-option.selected {
+        border-color: #e91e63;
+    }
+
+    /* upload photo */
+    .info .upload-photo {
+        width: 37%;
+        text-align: center;
+    }
+    .photo-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+    }
+
+    .photo-upload {
+        position: relative;
+        width: 100px;
+        height: 150px;
+        border: 3px dashed rgba(80,89,101,255);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        overflow: hidden;
+        background-color: rgba(33,38,46,255);
+        border-radius: 10px;
+    }
+
+    .upload-photo .label {
+        margin-bottom: 8px;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    .upload-photo .upload-icon {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        font-size: 24px;
+        color: white;
+        background-color: rgba(33,38,46,255);
+    }
+
+    .photo-upload input[type="file"] {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .upload-photo p {
+        margin-top: 2rem;
+        color: #ccc;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.8);
+    }
+
+    .modal-content {
+        background-color: #444;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 400px;
+        text-align: center;
+        color: white;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #fff;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .crop-container {
+        max-height: 400px;
+        overflow: hidden;
+    }
+
+    .crop-controls {
+        margin-top: 10px;
+    }
+
+    .crop-controls input[type="range"] {
+        width: 80%;
+    }
+
+    .choose-button,
+    .cancel-button {
+        padding: 10px 20px;
+        margin: 10px;
+        border: none;
+        background-color: #e91e63;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    .cancel-button {
+        background-color: #555;
+    }
+
+    .choose-button:hover,
+    .cancel-button:hover {
+        opacity: 0.8;
+    }
+
+    .optional-title {
+        position: relative;
+        text-align: center;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+        font-size: 2rem;
+    }
+    .optional-title::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        height: 1px;
+        width: 43%;
+        background-color: #555;
+    }
+
+    .optional-title::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: 0;
+        height: 1px;
+        width: 43%;
+        background-color: #555;
+    }
+
+    .optional .form-group input[type="text"] {
+        width: 100%;
+    }
+
+    .sign {
+        text-align: center;
+    }
+    .sign-up {
+        text-align: center;
+        width: 13%;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 20px;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        background-color: grey; /* Màu nút khi chưa có thể ấn */
+    }
+
+    .sign-up.enabled {
+        background: linear-gradient(90deg, #ff6347, #ff1493);
+        cursor: pointer;
+    }
+
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js")
+  script.
+    document.addEventListener('DOMContentLoaded', function () {
+      let cropper
+      let currentIndex
+      const cropperModal = document.getElementById('cropperModal')
+      const cropperImage = document.getElementById('cropperImage')
+      const zoomRange = document.getElementById('zoom-range')
+
+      function openCropper(event, index) {
+        const file = event.target.files[0]
+        if (file) {
+          currentIndex = index // Store the index of the current photo upload
+          const reader = new FileReader()
+          reader.onload = function (e) {
+            cropperImage.src = e.target.result
+            cropper = new Cropper(cropperImage, {
+              aspectRatio: 2 / 3, // Aspect ratio of 2:3
+              viewMode: 1,
+              zoomOnWheel: false,
+              cropBoxResizable: false, // Disable resizing of the crop box
+              ready() {
+                const containerData = cropper.getContainerData()
+                const cropBoxData = {
+                  width: containerData.width,
+                  height: containerData.width * (3 / 2)
+                }
+                cropper.setCropBoxData(cropBoxData)
+                zoomRange.value = cropper.getData().scaleX
+              }
+            })
+            cropperModal.style.display = 'block'
+          }
+          reader.readAsDataURL(file)
+        }
+      }
+
+      function closeCropper() {
+        if (cropper) {
+          cropper.destroy()
+          cropper = null
+        }
+        cropperModal.style.display = 'none'
+      }
+
+      function cropImage() {
+        if (cropper) {
+          const canvas = cropper.getCroppedCanvas({
+            width: 100, // Output canvas width
+            height: 150 // Output canvas height
+          })
+          canvas.toBlob(blob => {
+            const input = document.querySelector(`#photo-upload-${currentIndex} .file-input`)
+            const newFile = new File([blob], 'cropped_image.jpg', { type: 'image/jpeg' })
+            const dataTransfer = new DataTransfer()
+            dataTransfer.items.add(newFile)
+            input.files = dataTransfer.files
+
+            const uploadIcon = document.getElementById(`photo${currentIndex}`)
+            uploadIcon.src = URL.createObjectURL(blob)
+            closeCropper()
+          })
+        }
+      }
+
+      function rotateImage() {
+        if (cropper) {
+          cropper.rotate(90)
+        }
+      }
+
+      zoomRange.addEventListener('input', function () {
+        if (cropper) {
+          cropper.zoomTo(this.value)
+        }
+      })
+
+      window.openCropper = openCropper
+      window.closeCropper = closeCropper
+      window.cropImage = cropImage
+      window.rotateImage = rotateImage
+    })
+
+    document.querySelectorAll('.photo-upload').forEach(function(element) {
+      element.addEventListener('click', function(e) {
+        if (e.target === element || e.target.closest('.upload-icon')) {
+          element.querySelector('input[type="file"]').click()
+        }
+      })
+    })
+
+    function selectGender(gender) {
+      const manOption = document.getElementById('gender-man')
+      const womanOption = document.getElementById('gender-woman')
+
+      if (gender === 'man') {
+        manOption.classList.add('selected')
+        womanOption.classList.remove('selected')
+        document.getElementById('man').checked = true
+      } else {
+        womanOption.classList.add('selected')
+        manOption.classList.remove('selected')
+        document.getElementById('woman').checked = true
+      }
+    }
+
+    const signUpButton = document.getElementById('signUpButton')
+    const requiredFields = [
+      document.getElementById('name'),
+      document.getElementById('email'),
+      document.getElementById('major'),
+      document.getElementById('birthday-month'),
+      document.getElementById('birthday-day'),
+      document.getElementById('birthday-year'),
+      ...document.querySelectorAll('input[name="gender"]'),
+      document.getElementById('photo-upload-0').querySelector('input'),
+      document.getElementById('photo-upload-1').querySelector('input')
+    ]
+
+    const checkFields = () => {
+      let allFilled = requiredFields.every(field => {
+        if (field.type === 'file') {
+          return field.files.length > 0 // Check if the file input has files
+        } else if (field.type === 'radio') {
+          return Array.from(requiredFields).filter(f => f.name === field.name && f.checked).length > 0
+        } else {
+          return field.value.trim() !== ''
+        }
+      })
+      signUpButton.disabled = !allFilled
+      signUpButton.classList.toggle('enabled', allFilled)
+    }
+
+    requiredFields.forEach(field => {
+      if (field.type === 'radio') {
+        field.addEventListener('change', checkFields)
+      } else {
+        field.addEventListener('input', checkFields)
+      }
+    })
+
+    checkFields() // Check initially in case some fields are pre-filled
+
+    signUpButton.addEventListener('click', function (event) {
+      event.preventDefault()
+
+      const formData = new FormData()
+
+      formData.append('name', document.getElementById('name').value)
+      formData.append('email', document.getElementById('email').value)
+      formData.append('major', document.getElementById('major').value)
+      formData.append('birthday', `${document.getElementById('birthday-year').value}-${document.getElementById('birthday-month').value}-${document.getElementById('birthday-day').value}`)
+      formData.append('gender', document.querySelector('input[name="gender"]:checked').value)
+
+      const photoInputs = document.querySelectorAll('.photo-upload input[type="file"]')
+      photoInputs.forEach((input, index) => {
+        formData.append(`photo${index}`, input.files[0])
+      })
+
+      // Log dữ liệu FormData ra console để kiểm tra
+      for (let pair of formData.entries()) {
+        console.log(pair[0] + ': ' + pair[1])
+      }
+
+      fetch('/submit-form', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => {
+        if (response.ok) {
+          console.log('Form submitted successfully')
+        } else {
+          console.error('Error submitting form')
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error)
+      })
+    })
