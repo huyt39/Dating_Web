@@ -286,10 +286,21 @@ body {
   height: calc(100vh - 4rem);
   flex: 1;
   padding: 10px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  overflow-y: scroll; /* Thiết lập thanh cuộn dọc */
+}
+
+.chat-body::-webkit-scrollbar {
+  width: 12px; /* Độ rộng của thanh cuộn */
+}
+
+.chat-body::-webkit-scrollbar-thumb {
+  background-color: #555; /* Màu của thanh cuộn */
+  border-radius: 10px; /* Bo góc thanh cuộn */
+}
+
+.chat-body::-webkit-scrollbar-track {
+  background: #444 /* Màu nền của đường dẫn thanh cuộn */
+  border-radius: 10px; /* Bo góc đường dẫn thanh cuộn */
 }
 
 /* Message styling */

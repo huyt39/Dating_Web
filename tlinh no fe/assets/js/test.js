@@ -209,6 +209,96 @@ const mockChatData = {
                 user: 'Me',
                 text: 'alo!',
                 sentByMe: true
+            },
+            {
+                avatar: './assets/img/283a7ffd-768f-41d2-84c2-c5ce011fdeda.jpg',
+                user: 'Me',
+                text: 'alo!',
+                sentByMe: true
+            },
+            {
+                avatar: './assets/img/283a7ffd-768f-41d2-84c2-c5ce011fdeda.jpg',
+                user: 'Me',
+                text: 'alo!',
+                sentByMe: true
+            },
+            {
+                avatar: './assets/img/283a7ffd-768f-41d2-84c2-c5ce011fdeda.jpg',
+                user: 'Me',
+                text: 'alo!',
+                sentByMe: true
+            },
+            {
+                avatar: './assets/img/283a7ffd-768f-41d2-84c2-c5ce011fdeda.jpg',
+                user: 'Me',
+                text: 'alo!',
+                sentByMe: true
+            },
+            {
+                avatar: './assets/img/283a7ffd-768f-41d2-84c2-c5ce011fdeda.jpg',
+                user: 'Me',
+                text: 'alo!',
+                sentByMe: true
+            },
+            {
+                avatar: './assets/img/283a7ffd-768f-41d2-84c2-c5ce011fdeda.jpg',
+                user: 'Me',
+                text: 'alo!',
+                sentByMe: true
+            },
+            {
+                avatar: './assets/img/283a7ffd-768f-41d2-84c2-c5ce011fdeda.jpg',
+                user: 'Me',
+                text: 'alo!',
+                sentByMe: true
+            },
+            {
+                avatar: './assets/img/283a7ffd-768f-41d2-84c2-c5ce011fdeda.jpg',
+                user: 'Me',
+                text: 'alo!',
+                sentByMe: true
+            },
+            {
+                avatar: './assets/img/283a7ffd-768f-41d2-84c2-c5ce011fdeda.jpg',
+                user: 'Me',
+                text: 'alo!',
+                sentByMe: true
+            },
+            {
+                avatar: './assets/img/283a7ffd-768f-41d2-84c2-c5ce011fdeda.jpg',
+                user: 'Me',
+                text: 'alo!',
+                sentByMe: true
+            },
+            {
+                avatar: './assets/img/283a7ffd-768f-41d2-84c2-c5ce011fdeda.jpg',
+                user: 'Me',
+                text: 'alo!',
+                sentByMe: true
+            },
+            {
+                avatar: './assets/img/283a7ffd-768f-41d2-84c2-c5ce011fdeda.jpg',
+                user: 'Me',
+                text: 'alo!',
+                sentByMe: true
+            },
+            {
+                avatar: './assets/img/283a7ffd-768f-41d2-84c2-c5ce011fdeda.jpg',
+                user: 'Me',
+                text: 'alo!',
+                sentByMe: true
+            },
+            {
+                avatar: './assets/img/283a7ffd-768f-41d2-84c2-c5ce011fdeda.jpg',
+                user: 'Me',
+                text: 'alo!',
+                sentByMe: true
+            },
+            {
+                avatar: './assets/img/283a7ffd-768f-41d2-84c2-c5ce011fdeda.jpg',
+                user: 'Me',
+                text: 'alo!',
+                sentByMe: true
             }
         ]
     },
@@ -244,6 +334,8 @@ async function fetchChatData(userId) {
     }
 }
 
+
+
 // Function to display chat data in the chat interface
 function displayChatData(chatData) {
     const chatBody = document.querySelector('.chat-body');
@@ -261,6 +353,8 @@ function displayChatData(chatData) {
         `;
         chatBody.appendChild(messageElement);
     });
+
+    
 }
 
 // Function to handle message click
@@ -268,11 +362,13 @@ async function handleMessageClick(event) {
     const messageElement = event.currentTarget;
     const userId = messageElement.getAttribute('data-user-id');
     const chatData = await fetchChatData(userId);
+    const chatBody = document.querySelector('.chat-body');
     if (chatData) {
         displayChatData(chatData);
         document.getElementById('main').style.display = 'none';  // Hide swipe section
         document.getElementById('chat').style.display = 'block';  // Show chat sectio
     }
+    chatBody.scrollTop = chatBody.scrollHeight;
 }
 
 // Add event listener to each message item
@@ -298,3 +394,5 @@ document.getElementById('messagesTab').addEventListener('click', function() {
     this.classList.add('active');
     document.getElementById('matchesTab').classList.remove('active');
 });
+
+
