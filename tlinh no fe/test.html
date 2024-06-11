@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="./assets/css/test.css">
 </head>
+
 <body>
     <div class="side">
         <div class="header">
@@ -24,7 +26,8 @@
         <div class="content-section" id="matchesList">
             <div class="matches">
                 <div class="match">
-                    <div class="avatar"><img src="./assets/img/283a7ffd-768f-41d2-84c2-c5ce011fdeda.jpg" alt="Kevin"></div>
+                    <div class="avatar"><img src="./assets/img/283a7ffd-768f-41d2-84c2-c5ce011fdeda.jpg" alt="Kevin">
+                    </div>
                     <div class="user">Kevin</div>
                 </div>
                 <div class="match">
@@ -44,22 +47,23 @@
         </div>
         <div class="content-section" id="messagesList" style="display: none;">
             <div class="messages">
-                <div class="message">
-                    
-                    <div class="avatar"><img src="./assets/img/283a7ffd-768f-41d2-84c2-c5ce011fdeda.jpg" alt="David"></div>
+                <!-- Update each message item in the messages list with a data attribute -->
+                <div class="message" data-user-id="1">
+                    <div class="avatar"><img src="./assets/img/283a7ffd-768f-41d2-84c2-c5ce011fdeda.jpg" alt="David">
+                    </div>
                     <div class="info">
                         <div class="user">David</div>
                         <div class="text">You have the cutest smile I've ever seen...</div>
                     </div>
-
                 </div>
-                <div class="message">
+                <div class="message" data-user-id="2">
                     <div class="avatar"><img src="./assets/img/back.png" alt="Hank"></div>
                     <div class="info">
                         <div class="user">Hank</div>
                         <div class="text">What are you up to this weekend...</div>
                     </div>
                 </div>
+
                 <!-- Thêm các tin nhắn khác tại đây -->
             </div>
         </div>
@@ -70,7 +74,20 @@
             <button class="like"><i class="fas fa-heart"></i></button>
         </div>
     </div>
+
+    <!-- Add this inside the <body> tag, after the <div class="main" id="main"> -->
+    <div class="chat" id="chat" style="display: none;">
+        <div class="chat-body">
+            <!-- Chat messages will go here -->
+        </div>
+        <div class="chat-footer">
+            <input type="text" placeholder="Type a message..." />
+            <button><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+        </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
     <script src="./assets/js/test.js"></script>
 </body>
+
 </html>

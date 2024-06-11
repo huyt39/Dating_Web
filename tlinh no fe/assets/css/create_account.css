@@ -80,11 +80,17 @@ main .info{
     color: #fff;
 }
 .form-group input[type="text"],
-.form-group input[type="email"] {
+.form-group input[type="email"],
+.form-group input[type="password"]
+ {
     width: calc(100% - 6rem);
 }
-.form-group input[type="text"] {
+.form-group input[type="password"]{
     margin-right: 22px;
+}
+
+.form-group input[type="text"] {
+    
 }
 .form-group input[type="email"] {
     margin-right: 22px;
