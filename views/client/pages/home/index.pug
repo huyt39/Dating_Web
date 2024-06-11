@@ -1,0 +1,51 @@
+extends ../../layouts/default.pug
+include ../../mixins/box-head.pug
+
+block main
+  .container-fluid.p-0
+    .row.no-gutters
+      .col-12
+        +box-head
+        .upper
+          .back-ground(style="background-image: url('/images/744fe6d80266616aba687006b7d764ad.webp'); background-size: cover; background-position: center; width: 100%; height: 100vh; position: relative;")
+          .nav-bar(style="position: absolute; top: 20px; right: 20px;")
+            .action
+              a.signup(href='/signUp') Signup
+              a.btn#loginBtn(href='/logIn') Log in
+
+  script.
+    document.querySelectorAll('#loginBtn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        window.location.href = '/logIn';
+      });
+    });
+
+    document.querySelector('.popup').addEventListener('click', function(e) {
+      if (e.target === e.currentTarget) {
+        var popup = document.getElementById('loginPopup');
+        popup.classList.remove('active');
+      }
+    });
+
+    // Close popup if close button exists
+    var closeBtn = document.querySelector('.close-btn');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function() {
+        var popup = document.getElementById('loginPopup');
+        popup.classList.remove('active');
+      });
+    }
+
+    // Scroll event to change button opacity
+    window.addEventListener('scroll', function() {
+      var scrollPosition = window.scrollY;
+      var heroHeight = document.querySelector('.hero').offsetHeight;
+      var createAccountBtn = document.getElementById('createAccountBtn');
+
+      if (scrollPosition < heroHeight) {
+        var opacity = 1 - scrollPosition / heroHeight;
+        createAccountBtn.style.opacity = opacity;
+      } else {
+        createAccountBtn.style.opacity = 0;
+      }
+    });

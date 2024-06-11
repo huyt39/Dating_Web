@@ -1,17 +1,17 @@
 /* General body background color */
 body {
-  background-color: #f0f2f5; /* Màu nền của web */
+  background-color: #3c3c3c; /* Màu nền của web */
 }
 
 /* Header */
 .header {
-  background-color: #ffffff; /* Màu nền của header */
-  border-bottom: 1px solid #ddd;
-  padding: 10px 0;
+  background-color: white; /* Màu nền của header */
+  border-bottom: 0px solid #ddd;
+  padding: 5px 0;
 }
 
 .header .inner-logo img {
-  max-height: 50px;
+  max-height: 70px;
   max-width: 100%;
 }
 
@@ -32,22 +32,22 @@ body {
 
 /* Footer */
 .footer {
-  background-color: #ffffff; /* Màu nền của footer */
-  color: #333; /* Màu chữ của footer */
+  background-color: #3c3c3c; /* Màu nền của footer */
+  color: white; /* Màu chữ của footer */
   text-align: center;
   padding: 10px;
 }
 /* end footer */
 
 .box-head {
-  margin-bottom: 30px;
+  margin-bottom: 70px;
 }
 
 .box-head .inner-title {
   margin-bottom: 0;
   font-size: 28px;
   font-weight: 600;
-  color: #333; /* Màu chữ của tiêu đề box head */
+  color: white; /* Màu chữ của tiêu đề box head */
 }
 /* end box-head */
 
@@ -291,3 +291,4 @@ button[btn-delete]:hover {
   height: 538.4px;
   width: 538.4px;
 }
+
