@@ -347,7 +347,7 @@ function displayChatData(chatData) {
         messageElement.innerHTML = `
             <div class="avatar"><img src="${message.avatar}" alt="${message.user}"></div>
             <div class="info">
-                <div class="user">${message.user}</div>
+                
                 <div class="text">${message.text}</div>
             </div>
         `;
