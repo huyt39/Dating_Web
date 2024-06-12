@@ -1,15 +1,24 @@
 header.header
-    .container
-        .row.align-items-center
-            .col-3
-                .inner-logo
-                    a(href="/")
-                        img(src="/images/logo.png", alt="Logo")
-            .col-9
-                .inner-menu
-                    ul(style="list-style: none; padding-left: 0; margin-left: 0;")
-                        
-                        li
-                            a(href="/categories") Danh mục
-                        li 
-                            a(href="/cart") List
+  .container
+    .row.align-items-center
+      .col-3
+        .inner-logo
+          a(href="/")
+            img(src="/images/logo.png", alt="Logo")
+      .col-9
+        .inner-menu
+          ul(style="list-style: none; padding-left: 0; margin-left: 0;")
+            li
+              a(href="/categories") Danh mục
+            li
+              a(href="/cart") List
+            if !user
+              li
+                a(href="/logIn") Đăng nhập
+              li
+                a(href="/signUp") Đăng ký
+            else
+              li
+                a(href="/profile") Thông tin cá nhân
+              li
+                a(href="/logIn/logout") Đăng xuất
