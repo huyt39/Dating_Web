@@ -24,11 +24,8 @@ BEGIN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'Email already exists';
     END IF;
-
-    -- Tính tuổi người dùng sử dụng function CalculateAge
-    SET userAge = CalculateAge(pDateOfBirth);
-
     -- Kiểm tra tuổi người dùng
+    SET userAge = CalculateAge(pDateOfBirth); -- Tạo CalculateAge trong Function rồi
     IF userAge < 16 THEN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'User must be at least 16 years old to register';
@@ -80,7 +77,6 @@ BEGIN
     SET pUserID = tempUserID;
 END //
 DELIMITER ;
-
 /* 
 SET @UserID = 0;
 CALL LoginUser('example@example.com', 'plaintext_password', @UserID);
