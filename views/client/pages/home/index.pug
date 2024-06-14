@@ -9,10 +9,7 @@ block main
         .upper
           .back-ground(style="background-image: url('/images/744fe6d80266616aba687006b7d764ad.webp'); background-size: cover; background-position: center; width: 100%; height: 100vh; position: relative;")
           .nav-bar(style="position: absolute; top: 20px; right: 20px;")
-            .action
-              a.signup(href='/signUp') Signup
-              a.btn#loginBtn(href='/logIn') Log in
-
+            
   script.
     document.querySelectorAll('#loginBtn').forEach(btn => {
       btn.addEventListener('click', function() {
