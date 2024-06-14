@@ -62,7 +62,7 @@ BEGIN
     SELECT UserID, PasswordHash INTO tempUserID, tempPasswordHash
     FROM Users
     WHERE Email = pEmail;
-    -- Nếu không tìm thấy người dùng, phát ra lỗi
+
     IF tempUserID IS NULL THEN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'Invalid email or password';
@@ -77,6 +77,7 @@ BEGIN
     SET pUserID = tempUserID;
 END //
 DELIMITER ;
+
 /* 
 SET @UserID = 0;
 CALL LoginUser('example@example.com', 'plaintext_password', @UserID);
