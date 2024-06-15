@@ -6,3 +6,15 @@ block main
     .row
       .col-12
         +box-head(pageTitle)
+    .row
+      .col-6.offset-3
+        form(method="POST" action="/logIn")
+          .form-group
+            label(for="email") Email
+            input.form-control(type="email" name="email" id="email" placeholder="Email")
+          .form-group
+            label(for="password") Password
+            input.form-control(type="password" name="password" id="password" placeholder="Password")
+          button.btn.btn-primary(type="submit") Đăng nhập
+          if error
+            .alert.alert-danger#login-error #{error}

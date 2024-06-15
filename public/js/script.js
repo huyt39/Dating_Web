@@ -107,3 +107,14 @@ if (formAddToCart) {
   });
 }
 // End Carts
+
+// Script to hide login error message after 3 seconds
+document.addEventListener('DOMContentLoaded', function() {
+  const loginError = document.getElementById('login-error');
+  if (loginError) {
+    setTimeout(() => {
+      loginError.style.display = 'none';
+    }, 3000); // 3000 milliseconds = 3 seconds
+  }
+});
+

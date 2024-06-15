@@ -6,362 +6,366 @@ block main
     h1.title Create Account
 
     .info
-      .field
-        .form-group
-          label(for="name") Name
-          input(type="text" id="name" placeholder="Name")
-        .form-group
-          label(for="email") Email
-          input(type="email" id="email" placeholder="abc@gmail.com")
-        .form-group
-          label(for="major") Major
-          input(type="text" id="major" placeholder="CNTT, Dệt may, ...")
-        .form-group.birthday-group
-          .linh
-            label(for="birthday-month") Month
-            input(type="text" id="birthday-month" placeholder="MM")
-          .linh
-            label(for="birthday-day") Day
-            input(type="text" id="birthday-day" placeholder="DD")
-          .linh
-            label(for="birthday-year") Year
-            input(type="text" id="birthday-year" placeholder="YYYY")
-        .form-group
-          label(for="gender") Gender
-          .gender-options
-            .gender-option#gender-man(onclick="selectGender('man')")
-              input(type="radio" name="gender" id="man" value="man")
-              label(for="man") Man
-            .gender-option#gender-woman(onclick="selectGender('woman')")
-              input(type="radio" name="gender" id="woman" value="woman")
-              label(for="woman") Woman
+      form(method="POST" action="/signUp")
+        .field
+          .form-group
+            label(for="name") Name
+            input(type="text" id="name" name="name" placeholder="Name" required)
+          .form-group
+            label(for="email") Email
+            input(type="email" id="email" name="email" placeholder="abc@gmail.com" required)
+          .form-group
+            label(for="major") Major
+            input(type="text" id="major" name="major" placeholder="CNTT, Dệt may, ..." required)
+          .form-group.birthday-group
+            .linh
+              label(for="birthday-month") Month
+              input(type="text" id="birthday-month" name="birthdayMonth" placeholder="MM" required)
+            .linh
+              label(for="birthday-day") Day
+              input(type="text" id="birthday-day" name="birthdayDay" placeholder="DD" required)
+            .linh
+              label(for="birthday-year") Year
+              input(type="text" id="birthday-year" name="birthdayYear" placeholder="YYYY" required)
+          .form-group
+            label(for="gender") Gender
+            .gender-options
+              .gender-option#gender-man(onclick="selectGender('man')")
+                input(type="radio" name="gender" id="man" value="nam" required)
+                label(for="man") Man
+              .gender-option#gender-woman(onclick="selectGender('woman')")
+                input(type="radio" name="gender" id="woman" value="nu" required)
+                label(for="woman") Woman
+          .form-group
+            label(for="password") Password
+            input(type="password" id="password" name="password" placeholder="Password" required)
 
-      .upload-photo
-        .label Profile photos
-        .photo-grid
-          each index in [0, 1, 2]
-            .photo-upload(id=`photo-upload-${index}`)
-              input(type="file" accept="image/*" class="file-input" onchange=`openCropper(event, ${index})`)
-              img(src="plus-icon.png" alt="Upload" class="upload-icon" id=`photo${index}`)
-              i.fas.fa-plus-circle.upload-icon
-        p Upload 2 photos to start. Add 3 to make your profile stand out.
+        .upload-photo
+          .label Profile photos
+          .photo-grid
+            each index in [0, 1, 2]
+              .photo-upload(id=`photo-upload-${index}`)
+                input(type="file" accept="image/*" class="file-input" onchange=`openCropper(event, ${index})`)
+                img(src="plus-icon.png" alt="Upload" class="upload-icon" id=`photo${index}`)
+                i.fas.fa-plus-circle.upload-icon
+          p Upload 2 photos to start. Add 3 to make your profile stand out.
 
-    #cropperModal.modal
-      .modal-content
-        span.close(onclick="closeCropper()") &times;
-        h2 Adjust Photo
-        .crop-container
-          img#cropperImage(src="" alt="Cropper")
-        .crop-controls
-          input#zoom-range(type="range" min="1" max="3" step="0.1")
-          button(onclick="rotateImage()") Rotate
-        button.choose-button(onclick="cropImage()") Choose
-        button.cancel-button(onclick="closeCropper()") Cancel
+        #cropperModal.modal
+          .modal-content
+            span.close(onclick="closeCropper()") &times;
+            h2 Adjust Photo
+            .crop-container
+              img#cropperImage(src="" alt="Cropper")
+            .crop-controls
+              input#zoom-range(type="range" min="1" max="3" step="0.1")
+              button(onclick="rotateImage()") Rotate
+            button.choose-button(onclick="cropImage()") Choose
+            button.cancel-button(onclick="closeCropper()") Cancel
 
-    .sign
-      button#signUpButton.sign-up(disabled) Sign Up
+        .sign
+          button#signUpButton.sign-up(type="submit" disabled) Sign Up
 
-  //- Nhúng CSS trực tiếp
-  style.
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        overflow-x: hidden; /* Ẩn thanh cuộn ngang */
-    }
+    //- Nhúng CSS trực tiếp
+    style.
+      * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+          overflow-x: hidden; /* Ẩn thanh cuộn ngang */
+      }
 
-    html {
-        font-size: 62.5%;
-    }
+      html {
+          font-size: 62.5%;
+      }
 
-    body {
-        font-family: 'Proxima Nova', sans-serif;
-        font-size: 1.6rem;
-        background-color: rgba(17,20,24,255);
-        color: white;
-    }
+      body {
+          font-family: 'Proxima Nova', sans-serif;
+          font-size: 1.6rem;
+          background-color: rgba(17,20,24,255);
+          color: white;
+      }
 
-    a {
-        text-decoration: none;
-    }
+      a {
+          text-decoration: none;
+      }
 
-    /* nav */
-    .nav-bar {
-        height: 9.6rem;
-        position: relative;
-        display: flex;
-        align-items: center;
-    }
-    .nav-bar::after {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        content: '';
-        width: 100%;
-        height: 0.06rem;
-        background-color: #333;
-    }
+      /* nav */
+      .nav-bar {
+          height: 9.6rem;
+          position: relative;
+          display: flex;
+          align-items: center;
+      }
+      .nav-bar::after {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          content: '';
+          width: 100%;
+          height: 0.06rem;
+          background-color: #333;
+      }
 
-    .nav-bar .logo {
-        margin-left: 3rem;
-        width: 15rem;
-        height: auto;
-    }
+      .nav-bar .logo {
+          margin-left: 3rem;
+          width: 15rem;
+          height: auto;
+      }
 
-    /* main */
-    main {
-        width: 65%;
-        margin: 3rem auto;
-    }
+      /* main */
+      main {
+          width: 65%;
+          margin: 3rem auto;
+      }
 
-    main .title {
-        text-align: center;
-    }
+      main .title {
+          text-align: center;
+      }
 
-    /* info */
-    main .info {
-        margin-top: 3rem;
-        display: flex;
-        justify-content: space-between;
-    }
+      /* info */
+      main .info {
+          margin-top: 3rem;
+          display: flex;
+          justify-content: space-between;
+      }
 
-    .info .field {
-        width: 56%;
-    }
+      .info .field {
+          width: 56%;
+      }
 
-    .form-group {
-        margin-bottom: 20px;
-    }
-    .form-group label {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: bold;
-    }
-    .form-group input {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #333;
-        border-radius: 8px;
-        background-color: white; /* Màu nền input */
-        color: black; /* Màu chữ trong input */
-    }
-    .form-group.birthday-group {
-        display: flex;
-    }
-    .form-group.birthday-group input {
-        width: calc(100% - 4rem);
-    }
+      .form-group {
+          margin-bottom: 20px;
+      }
+      .form-group label {
+          display: block;
+          margin-bottom: 8px;
+          font-weight: bold;
+      }
+      .form-group input {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #333;
+          border-radius: 8px;
+          background-color: white; /* Màu nền input */
+          color: black; /* Màu chữ trong input */
+      }
+      .form-group.birthday-group {
+          display: flex;
+      }
+      .form-group.birthday-group input {
+          width: calc(100% - 4rem);
+      }
 
-    .gender-options {
-        display: flex;
-        gap: 1rem;
-    }
+      .gender-options {
+          display: flex;
+          gap: 1rem;
+      }
 
-    .gender-option {
-        display: flex;
-        min-width: 15rem;
-        align-items: center;
-        justify-content: center;
-        border: 2px solid #444;
-        border-radius: 25px;
-        padding: 0.5rem 1rem;
-        cursor: pointer;
-        color: white;
-    }
+      .gender-option {
+          display: flex;
+          min-width: 15rem;
+          align-items: center;
+          justify-content: center;
+          border: 2px solid #444;
+          border-radius: 25px;
+          padding: 0.5rem 1rem;
+          cursor: pointer;
+          color: white;
+      }
 
-    .gender-option:hover {
-        background-color: #333;
-    }
+      .gender-option:hover {
+          background-color: #333;
+      }
 
-    .gender-option input {
-        display: none;
-    }
+      .gender-option input {
+          display: none;
+      }
 
-    .gender-option label {
-        cursor: pointer;
-        margin: 0;
-    }
+      .gender-option label {
+          cursor: pointer;
+          margin: 0;
+      }
 
-    .gender-option.selected {
-        border-color: #e91e63;
-    }
+      .gender-option.selected {
+          border-color: #e91e63;
+      }
 
-    /* upload photo */
-    .info .upload-photo {
-        width: 37%;
-        text-align: center;
-    }
-    .photo-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 0.5rem;
-    }
+      /* upload photo */
+      .info .upload-photo {
+          width: 37%;
+          text-align: center;
+      }
+      .photo-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 0.5rem;
+      }
 
-    .photo-upload {
-        position: relative;
-        width: 100px;
-        height: 150px;
-        border: 3px dashed rgba(80,89,101,255);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        overflow: hidden;
-        background-color: rgba(33,38,46,255);
-        border-radius: 10px;
-    }
+      .photo-upload {
+          position: relative;
+          width: 100px;
+          height: 150px;
+          border: 3px dashed rgba(80,89,101,255);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          overflow: hidden;
+          background-color: rgba(33,38,46,255);
+          border-radius: 10px;
+      }
 
-    .upload-photo .label {
-        margin-bottom: 8px;
-        font-weight: bold;
-        text-align: left;
-    }
+      .upload-photo .label {
+          margin-bottom: 8px;
+          font-weight: bold;
+          text-align: left;
+      }
 
-    .upload-photo .upload-icon {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        font-size: 24px;
-        color: white;
-        background-color: rgba(33,38,46,255);
-    }
+      .upload-photo .upload-icon {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          font-size: 24px;
+          color: white;
+          background-color: rgba(33,38,46,255);
+      }
 
-    .photo-upload input[type="file"] {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        opacity: 0;
-        cursor: pointer;
-    }
+      .photo-upload input[type="file"] {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+          cursor: pointer;
+      }
 
-    .upload-photo p {
-        margin-top: 2rem;
-        color: #ccc;
-    }
+      .upload-photo p {
+          margin-top: 2rem;
+          color: #ccc;
+      }
 
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0,0,0,0.8);
-    }
+      .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          overflow: auto;
+          background-color: rgba(0,0,0,0.8);
+      }
 
-    .modal-content {
-        background-color: #444;
-        margin: 15% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%;
-        max-width: 400px;
-        text-align: center;
-        color: white;
-    }
+      .modal-content {
+          background-color: #444;
+          margin: 15% auto;
+          padding: 20px;
+          border: 1px solid #888;
+          width: 80%;
+          max-width: 400px;
+          text-align: center;
+          color: white;
+      }
 
-    .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    }
+      .close {
+          color: #aaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+      }
 
-    .close:hover,
-    .close:focus {
-        color: #fff;
-        text-decoration: none;
-        cursor: pointer;
-    }
+      .close:hover,
+      .close:focus {
+          color: #fff;
+          text-decoration: none;
+          cursor: pointer;
+      }
 
-    .crop-container {
-        max-height: 400px;
-        overflow: hidden;
-    }
+      .crop-container {
+          max-height: 400px;
+          overflow: hidden;
+      }
 
-    .crop-controls {
-        margin-top: 10px;
-    }
+      .crop-controls {
+          margin-top: 10px;
+      }
 
-    .crop-controls input[type="range"] {
-        width: 80%;
-    }
+      .crop-controls input[type="range"] {
+          width: 80%;
+      }
 
-    .choose-button,
-    .cancel-button {
-        padding: 10px 20px;
-        margin: 10px;
-        border: none;
-        background-color: #e91e63;
-        color: white;
-        cursor: pointer;
-        border-radius: 5px;
-    }
+      .choose-button,
+      .cancel-button {
+          padding: 10px 20px;
+          margin: 10px;
+          border: none;
+          background-color: #e91e63;
+          color: white;
+          cursor: pointer;
+          border-radius: 5px;
+      }
 
-    .cancel-button {
-        background-color: #555;
-    }
+      .cancel-button {
+          background-color: #555;
+      }
 
-    .choose-button:hover,
-    .cancel-button:hover {
-        opacity: 0.8;
-    }
+      .choose-button:hover,
+      .cancel-button:hover {
+          opacity: 0.8;
+      }
 
-    .optional-title {
-        position: relative;
-        text-align: center;
-        margin-top: 3rem;
-        margin-bottom: 3rem;
-        font-size: 2rem;
-    }
-    .optional-title::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 0;
-        height: 1px;
-        width: 43%;
-        background-color: #555;
-    }
+      .optional-title {
+          position: relative;
+          text-align: center;
+          margin-top: 3rem;
+          margin-bottom: 3rem;
+          font-size: 2rem;
+      }
+      .optional-title::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 0;
+          height: 1px;
+          width: 43%;
+          background-color: #555;
+      }
 
-    .optional-title::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        right: 0;
-        height: 1px;
-        width: 43%;
-        background-color: #555;
-    }
+      .optional-title::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          right: 0;
+          height: 1px;
+          width: 43%;
+          background-color: #555;
+      }
 
-    .optional .form-group input[type="text"] {
-        width: 100%;
-    }
+      .optional .form-group input[type="text"] {
+          width: 100%;
+      }
 
-    .sign {
-        text-align: center;
-    }
-    .sign-up {
-        text-align: center;
-        width: 13%;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 20px;
-        color: #fff;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background 0.3s ease;
-        background-color: grey; /* Màu nút khi chưa có thể ấn */
-    }
+      .sign {
+          text-align: center;
+      }
+      .sign-up {
+          text-align: center;
+          width: 13%;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 20px;
+          color: #fff;
+          font-size: 16px;
+          cursor: pointer;
+          transition: background 0.3s ease;
+          background-color: grey; /* Màu nút khi chưa có thể ấn */
+      }
 
-    .sign-up.enabled {
-        background: linear-gradient(90deg, #ff6347, #ff1493);
-        cursor: pointer;
-    }
+      .sign-up.enabled {
+          background: linear-gradient(90deg, #ff6347, #ff1493);
+          cursor: pointer;
+      }
 
   script(src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js")
   script.
@@ -514,8 +518,11 @@ block main
       formData.append('name', document.getElementById('name').value)
       formData.append('email', document.getElementById('email').value)
       formData.append('major', document.getElementById('major').value)
-      formData.append('birthday', `${document.getElementById('birthday-year').value}-${document.getElementById('birthday-month').value}-${document.getElementById('birthday-day').value}`)
+      formData.append('birthdayMonth', document.getElementById('birthday-month').value)
+      formData.append('birthdayDay', document.getElementById('birthday-day').value)
+      formData.append('birthdayYear', document.getElementById('birthday-year').value)
       formData.append('gender', document.querySelector('input[name="gender"]:checked').value)
+      formData.append('password', document.getElementById('password').value)
 
       const photoInputs = document.querySelectorAll('.photo-upload input[type="file"]')
       photoInputs.forEach((input, index) => {
@@ -527,13 +534,14 @@ block main
         console.log(pair[0] + ': ' + pair[1])
       }
 
-      fetch('/submit-form', {
+      fetch('/signUp', {
         method: 'POST',
         body: formData
       })
       .then(response => {
         if (response.ok) {
           console.log('Form submitted successfully')
+          window.location.href = '/categories'; // Chuyển hướng người dùng đến trang danh mục
         } else {
           console.error('Error submitting form')
         }

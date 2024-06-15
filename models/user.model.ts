@@ -19,7 +19,7 @@ const User = sequelize.define("User", {
     type: DataTypes.DATE
   },
   Gender: {
-    type: DataTypes.ENUM('nam', 'nu'),  // Sử dụng ENUM cho giới tính
+    type: DataTypes.ENUM('nam', 'nu'),
     allowNull: false
   },
   Email: {
@@ -33,7 +33,7 @@ const User = sequelize.define("User", {
   }
 }, {
   tableName: "users",
-  timestamps: true, // Quản lý tự động các trường createdAt và updatedAt
+  timestamps: false  // Tắt timestamps
 });
 
 export default User;

@@ -1,0 +1,26 @@
+extends ../../layouts/default.pug
+include ../../mixins/box-head.pug
+
+block main
+  .container.my-3
+    .row
+      .col-12
+        +box-head(pageTitle)
+    .row
+      .col-6.offset-3
+        h2 Thông tin cá nhân
+        p
+          strong Tên: 
+          | #{user.Name}
+        p
+          strong Email: 
+          | #{user.Email}
+        p
+          strong Ngành học: 
+          | #{user.Major}
+        p
+          strong Ngày sinh: 
+          | #{user.DateOfBirth}
+        p
+          strong Giới tính: 
+          | #{user.Gender}
