@@ -1,20 +1,30 @@
 extends ../../layouts/default.pug
-include ../../mixins/box-head.pug
 
 block main
   .container.my-3
-    .row
-      .col-12
-        +box-head(pageTitle)
-    .row
-      .col-6.offset-3
-        form(method="POST" action="/logIn")
-          .form-group
-            label(for="email") Email
-            input.form-control(type="email" name="email" id="email" placeholder="Email")
-          .form-group
-            label(for="password") Password
-            input.form-control(type="password" name="password" id="password" placeholder="Password")
-          button.btn.btn-primary(type="submit") Đăng nhập
-          if error
-            .alert.alert-danger#login-error #{error}
+    h1.title Trang đăng nhập
+
+    if error
+      .alert.alert-danger(id="loginError")= error
+
+    form(action="/logIn" method="post" class="login-form")
+      .form-group
+        label(for="email") Email
+        input(type="email" id="email" name="email" placeholder="abc@gmail.com" required class="form-control")
+      .form-group
+        label(for="password") Password
+        input(type="password" id="password" name="password" placeholder="Password" required class="form-control")
+      button(type="submit" class="btn btn-primary") Đăng nhập
+
+  // CSS trực tiếp cho form đăng nhập
+  style.
+    .login-form .form-control {
+      width: 100%; /* Đảm bảo các ô nhập liệu chiếm toàn bộ chiều rộng */
+      max-width: 400px; /* Đặt kích thước tối đa để không quá lớn */
+      margin-bottom: 10px; /* Khoảng cách giữa các ô nhập liệu */
+    }
+
+    .login-form .btn-primary {
+      width: 100%; /* Đảm bảo nút đăng nhập chiếm toàn bộ chiều rộng */
+      max-width: 400px; /* Đặt kích thước tối đa để không quá lớn */
+    }

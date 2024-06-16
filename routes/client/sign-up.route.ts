@@ -1,8 +1,12 @@
 import { Router } from "express";
-import * as controller from "../../controllers/client/sign-up.controller"
+import { index, register } from "../../controllers/client/sign-up.controller";
+import multer from "multer";
 
-const router: Router = Router();
+const upload = multer({ dest: "uploads/" });
 
-router.get("/", controller.index);
-router.post("/", controller.register);
+const router = Router();
+
+router.get("/", index);
+router.post("/", upload.array("photos", 3), register);
+
 export const signUpRoutes: Router = router;

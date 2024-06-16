@@ -1,12 +1,15 @@
 import express, { Express } from 'express';
+import multer from 'multer';
 import dotenv from 'dotenv';
 import session from 'express-session';
 import moment from 'moment';
 import clientRoutes from './routes/client/index.route';
+import { extendSession } from "./middleware/session-extender";
 
 dotenv.config(); // Load environment variables
 
 const app: Express = express();
+const upload = multer({ dest: 'uploads/' });
 const port: number | string = process.env.PORT || 3000;
 
 // Middleware để phân tích dữ liệu form và JSON
@@ -21,6 +24,9 @@ app.use(session({
   cookie: { secure: false }  // Đảm bảo bảo mật cho production, có thể set thành true khi dùng HTTPS
 }));
 
+// Sử dụng session extender
+app.use(extendSession);
+
 // Thiết lập thư mục chứa các file tĩnh
 app.use(express.static('public'));
 
@@ -32,7 +38,7 @@ app.set('views', './views/client'); // Đảm bảo đường dẫn views
 app.locals.moment = moment; // Sử dụng moment cho view
 
 // Client Routes
-clientRoutes(app);
+clientRoutes(app); // Gọi hàm clientRoutes với đối tượng app
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}`);

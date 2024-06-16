@@ -13,8 +13,7 @@
       "./types"
     ]
   },
-  "include": [
-    "./types",
-    "./src/**/*"
-  ]
+  "include": ["src/**/*.ts", "types/**/*.ts"], // Bao gồm cả thư mục types
+  "exclude": ["node_modules"]
+  
 }
