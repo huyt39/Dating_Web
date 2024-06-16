@@ -10,6 +10,7 @@ interface UserAttributes {
   Gender: 'man' | 'woman';
   Email: string;
   Password: string;
+  Category: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -26,6 +27,7 @@ class User extends Model<UserAttributes, UserCreationAttributes> implements User
   public Gender!: 'man' | 'woman';
   public Email!: string;
   public Password!: string;
+  public Category!: string;
 
   // Thời gian tạo và cập nhật
   public readonly createdAt!: Date;
@@ -60,6 +62,10 @@ User.init(
       unique: true
     },
     Password: {
+      type: DataTypes.STRING(255),
+      allowNull: false
+    },
+    Category: {
       type: DataTypes.STRING(255),
       allowNull: false
     }

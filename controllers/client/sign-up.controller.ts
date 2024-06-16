@@ -12,7 +12,7 @@ export const index = async (req: Request, res: Response) => {
 
 //[POST] /signUp
 export const register = async (req: Request, res: Response) => {
-  const { name, email, major, birthdayMonth, birthdayDay, birthdayYear, gender, password } = req.body;
+  const { name, email, major, birthdayMonth, birthdayDay, birthdayYear, gender, password, category } = req.body;
   const files = req.files as Express.Multer.File[];
 
   if (!files || files.length < 3) {
@@ -37,7 +37,8 @@ export const register = async (req: Request, res: Response) => {
       Major: major,
       DateOfBirth: dateOfBirth,
       Gender: gender, // Chuyển đổi giá trị Gender
-      Password: hashedPassword
+      Password: hashedPassword,
+      Category: category
     });
 
     (req.session as any).user = user.get({ plain: true });

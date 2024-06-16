@@ -39,6 +39,15 @@ block main
               .gender-option#gender-woman(onclick="selectGender('woman')")
                 input(type="radio" name="gender" id="woman" value="woman")
                 label(for="woman") Woman
+          .form-group 
+            label(for="category") Category 
+            select(name="category" id="category")
+              option(value="Cùng nhau qua môn") Cùng nhau qua môn
+              option(value="Cùng đạt học bổng") Cùng đạt học bổng
+              option(value="Ghép đôi làm project") Ghép đôi làm project
+              option(value="Ghép đôi học hành") Ghép đôi học hành
+              option(value="Bạn thân khác giới") Bạn thân khác giới
+              option(value="Gắn bó lâu dài") Gắn bó lâu dài
 
           .upload-photo
             .label Profile photos
