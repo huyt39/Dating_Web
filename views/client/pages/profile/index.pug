@@ -1,26 +1,102 @@
 extends ../../layouts/default.pug
-include ../../mixins/box-head.pug
 
 block main
   .container.my-3
-    .row
-      .col-12
-        +box-head(pageTitle)
-    .row
-      .col-6.offset-3
-        h2 Thông tin cá nhân
-        p
-          strong Tên: 
-          | #{user.Name}
-        p
-          strong Email: 
-          | #{user.Email}
-        p
-          strong Ngành học: 
-          | #{user.Major}
-        p
+    h1.title Thông tin cá nhân
+
+    .profile-card
+      .profile-header
+        h2 #{user.Name}
+        p.email #{user.Email}
+      .profile-details
+        .detail
           strong Ngày sinh: 
-          | #{user.DateOfBirth}
-        p
+          span #{user.DateOfBirth}
+        .detail
           strong Giới tính: 
-          | #{user.Gender}
+          span #{user.Gender}
+        .detail
+          strong Ngành học: 
+          span #{user.Major}
+
+    button(onclick="window.location.href='/logIn/logout'") Đăng xuất
+
+  // CSS trực tiếp cho trang thông tin cá nhân
+  style.
+    body {
+      font-family: 'Proxima Nova', sans-serif;
+      font-size: 1.6rem;
+      background-color: rgba(17,20,24,255);
+      color: white;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #2c2f33;
+      border-radius: 8px;
+    }
+
+    .title {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #ff6347; /* màu tiêu đề */
+    }
+
+    .profile-card {
+      background-color: #23272a;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    .profile-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .profile-header h2 {
+      margin: 0;
+      font-size: 2.4rem;
+      color: #e91e63; /* màu tên người dùng */
+    }
+
+    .profile-header p.email {
+      font-size: 1.4rem;
+      color: #b0b3b8; /* màu email */
+    }
+
+    .profile-details {
+      margin-top: 20px;
+    }
+
+    .profile-details .detail {
+      margin-bottom: 10px;
+      font-size: 1.6rem;
+    }
+
+    .profile-details .detail strong {
+      color: #ff6347; /* màu tiêu đề chi tiết */
+    }
+
+    .profile-details .detail span {
+      color: #b0b3b8; /* màu chi tiết */
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 10px 0;
+      border: none;
+      border-radius: 5px;
+      background: linear-gradient(90deg, #ff6347, #ff1493);
+      color: white;
+      font-size: 1.6rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #ff1493, #ff6347);
+    }

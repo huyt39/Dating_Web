@@ -1,3 +1,4 @@
+// log-in.controller.ts
 import { Request, Response } from "express";
 import User from "../../models/user.model";
 import bcrypt from 'bcrypt';
@@ -19,14 +20,11 @@ export const login = async (req: Request, res: Response) => {
   const user = await User.findOne({ where: { Email: email } });
 
   if (user) {
-    const isMatch = await bcrypt.compare(password, user.get('Password'));
-
+    const isMatch = await bcrypt.compare(password, user.get('Password') as string); // So sánh mật khẩu đã mã hóa
     if (isMatch) {
       const session = req.session as any;
       session.user = user;
-      const returnTo = session.returnTo || '/';
-      delete session.returnTo;
-      res.redirect(returnTo);
+      res.redirect('/categories'); // Chuyển hướng người dùng đến trang danh mục
     } else {
       res.render("pages/logIn/index", {
         pageTitle: "Trang đăng nhập",
@@ -44,12 +42,11 @@ export const login = async (req: Request, res: Response) => {
 //[GET] /logIn/logout
 export const logout = (req: Request, res: Response) => {
   const session = req.session as any;
-  const returnTo = session.returnTo || '/';
   session.destroy((err: any) => {
     if (err) {
       return res.redirect('/');
     }
     res.clearCookie('sid');
-    res.redirect(returnTo);
+    res.redirect('/');
   });
 };

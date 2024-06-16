@@ -38,7 +38,7 @@ app.set('views', './views/client'); // Đảm bảo đường dẫn views
 app.locals.moment = moment; // Sử dụng moment cho view
 
 // Client Routes
-clientRoutes(app); // Gọi hàm clientRoutes với đối tượng app
+clientRoutes(app);
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}`);
