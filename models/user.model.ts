@@ -1,12 +1,14 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import sequelize from "../config/database";
+import Category from "./category.model";
+import UserCategory from "./userCategory.model";
 
 // Định nghĩa các thuộc tính của User
 interface UserAttributes {
   UserID: number;
   Name: string;
   Major?: string;
-  DateOfBirth?: Date;
+  DateOfBirth?: Date | null;
   Gender: 'man' | 'woman';
   Email: string;
   Password: string;
@@ -23,7 +25,7 @@ class User extends Model<UserAttributes, UserCreationAttributes> implements User
   public UserID!: number;
   public Name!: string;
   public Major!: string;
-  public DateOfBirth!: Date;
+  public DateOfBirth!: Date | null;
   public Gender!: 'man' | 'woman';
   public Email!: string;
   public Password!: string;
@@ -32,6 +34,8 @@ class User extends Model<UserAttributes, UserCreationAttributes> implements User
   // Thời gian tạo và cập nhật
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
+
+  public addCategory!: (category: typeof Category) => void;
 }
 
 User.init(
@@ -50,7 +54,8 @@ User.init(
       type: DataTypes.STRING(255)
     },
     DateOfBirth: {
-      type: DataTypes.DATE
+      type: DataTypes.DATE,
+      allowNull: true
     },
     Gender: {
       type: DataTypes.ENUM('man', 'woman'),
@@ -77,4 +82,5 @@ User.init(
   }
 );
 
+User.belongsToMany(Category, { through: UserCategory, foreignKey: 'UserID' });
 export default User;

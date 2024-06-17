@@ -8,16 +8,32 @@ block main
       .profile-header
         h2 #{user.Name}
         p.email #{user.Email}
-      .profile-details
-        .detail
-          strong Ngày sinh: 
-          span #{user.DateOfBirth}
-        .detail
-          strong Giới tính: 
-          span #{user.Gender}
-        .detail
-          strong Ngành học: 
-          span #{user.Major}
+      
+      form(action="/profile/edit" method="POST")
+        .profile-details
+          .form-group
+            label(for="name") Tên
+            input(type="text" id="name" name="name" value=user.Name)
+
+          .form-group
+            label(for="email") Email
+            input(type="email" id="email" name="email" value=user.Email)
+
+          .form-group
+            label(for="dateOfBirth") Ngày sinh
+            input(type="date" id="dateOfBirth" name="dateOfBirth" value="#{user.DateOfBirth ? user.DateOfBirth.toISOString().split('T')[0] : ''}")
+
+          .form-group
+            label(for="gender") Giới tính
+            select(id="gender" name="gender")
+              option(value="man" selected=user.Gender === 'man') Nam
+              option(value="woman" selected=user.Gender === 'woman') Nữ
+
+          .form-group
+            label(for="major") Ngành học
+            input(type="text" id="major" name="major" value=user.Major)
+
+        button(type="submit") Cập nhật thông tin
 
     button(onclick="window.location.href='/logIn/logout'") Đăng xuất
 
@@ -51,22 +67,6 @@ block main
       box-shadow: 0 0 10px rgba(0,0,0,0.5);
     }
 
-    .profile-header {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .profile-header h2 {
-      margin: 0;
-      font-size: 2.4rem;
-      color: #e91e63; /* màu tên người dùng */
-    }
-
-    .profile-header p.email {
-      font-size: 1.4rem;
-      color: #b0b3b8; /* màu email */
-    }
-
     .profile-details {
       margin-top: 20px;
     }
@@ -82,6 +82,23 @@ block main
 
     .profile-details .detail span {
       color: #b0b3b8; /* màu chi tiết */
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #333;
+      border-radius: 8px;
+      background-color: white; /* Màu nền input */
+      color: black; /* Màu chữ trong input */
     }
 
     button {
