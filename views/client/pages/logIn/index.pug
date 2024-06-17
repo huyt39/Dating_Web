@@ -2,29 +2,35 @@ extends ../../layouts/default.pug
 
 block main
   .container.my-3
-    h1.title Trang đăng nhập
+    h1.title(style="color: white;") Trang đăng nhập
 
     if error
       .alert.alert-danger(id="loginError")= error
 
     form(action="/logIn" method="post" class="login-form")
       .form-group
-        label(for="email") Email
-        input(type="email" id="email" name="email" placeholder="abc@gmail.com" required class="form-control")
+        label(for="email" style="color: white;") Email
+        input(type="email" id="email" name="email" placeholder="abc@gmail.com" required class="form-control" style="color: white; background-color: #333;")
       .form-group
-        label(for="password") Password
-        input(type="password" id="password" name="password" placeholder="Password" required class="form-control")
-      button(type="submit" class="btn btn-primary") Đăng nhập
+        label(for="password" style="color: white;") Password
+        input(type="password" id="password" name="password" placeholder="Password" required class="form-control" style="color: white; background-color: #333;")
+      button(type="submit" class="btn btn-primary" style="width: 100%; max-width: 400px; background-image: linear-gradient(to right, #ff6347, #ff1493); border: none;") Đăng nhập
 
   // CSS trực tiếp cho form đăng nhập
   style.
     .login-form .form-control {
-      width: 100%; /* Đảm bảo các ô nhập liệu chiếm toàn bộ chiều rộng */
-      max-width: 400px; /* Đặt kích thước tối đa để không quá lớn */
-      margin-bottom: 10px; /* Khoảng cách giữa các ô nhập liệu */
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 10px;
+      color: white; /* Màu chữ trắng */
+      background-color: #333; /* Màu nền tối */
+      border-color: #555; /* Màu viền ô nhập liệu */
     }
 
     .login-form .btn-primary {
-      width: 100%; /* Đảm bảo nút đăng nhập chiếm toàn bộ chiều rộng */
-      max-width: 400px; /* Đặt kích thước tối đa để không quá lớn */
+      width: 100%;
+      max-width: 400px;
+      background-image: linear-gradient(to right, #ff6347, #ff1493); /* Màu gradient từ #ff6347 đến #ff1493 */
+      border: none; /* Xóa viền */
+      color: white; /* Màu chữ trắng */
     }

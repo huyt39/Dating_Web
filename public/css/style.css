@@ -28,7 +28,30 @@ body {
 .header .inner-menu > ul > li {
   margin-left: 20px;
 }
-/* end header */
+
+/* Thêm CSS mới cho các mục trong header */
+.header .inner-menu > ul > li.menu-item {
+  margin-left: 20px;
+  display: inline-block;
+}
+
+.header .inner-menu > ul > li.menu-item a {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 2px solid #333; /* Màu viền */
+  border-radius: 50px; /* Bo tròn góc */
+  color: #333; /* Màu chữ */
+  text-decoration: none; /* Bỏ gạch chân */
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.header .inner-menu > ul > li.menu-item a:hover {
+  background-color: #333; /* Màu nền khi hover */
+  color: #fff; /* Màu chữ khi hover */
+}
+/* End header */
+
 
 /* Footer */
 .footer {
@@ -126,6 +149,28 @@ body {
 /* End categories */
 
 /* Partner detail */
+.partner-detail .inner-title,
+.partner-detail .inner-barcode {
+  color: white; /* Màu chữ */
+}
+
+.partner-detail .btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 2px solid #333; /* Màu viền */
+  border-radius: 50px; /* Bo tròn góc */
+  color: white; /* Màu chữ */
+  background: linear-gradient(135deg, #ff4b2b, #ff416c); /* Màu nền gradient */
+  text-decoration: none; /* Bỏ gạch chân */
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.partner-detail .btn:hover {
+  background: linear-gradient(135deg, #ff416c, #ff4b2b); /* Màu nền gradient khi hover */
+  color: white; /* Màu chữ khi hover */
+}
+
 .partner-detail .inner-images .inner-image {
   width: 100%;
   aspect-ratio: 1/1;
@@ -141,7 +186,6 @@ body {
 .partner-detail .inner-title {
   font-size: 20px;
   font-weight: 700;
-  color: #333;
   margin-bottom: 10px;
 }
 
@@ -201,25 +245,24 @@ body {
 .partner-detail .inner-infomation .inner-text img {
   max-width: 100%;
   height: auto;
+}
 
-  .swiper.imagesThumb {
-      height: 100px; /* Chiều cao cố định cho Swiper ở phía dưới */
-  }
+.swiper.imagesThumb {
+  height: 100px; /* Chiều cao cố định cho Swiper ở phía dưới */
+}
 
-  .swiper.imagesThumb .swiper-slide {
-      width: auto; /* Để các slide tự động điều chỉnh kích thước */
-      height: 100%; /* Chiều cao tối đa của các slide */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-  }
+.swiper.imagesThumb .swiper-slide {
+  width: auto; /* Để các slide tự động điều chỉnh kích thước */
+  height: 100%; /* Chiều cao tối đa của các slide */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  .swiper.imagesThumb .swiper-slide img {
-      width: auto;
-      height: 100%;
-      object-fit: cover; /* Đảm bảo hình ảnh được phủ đầy slide mà không bị méo */
-  }
-
+.swiper.imagesThumb .swiper-slide img {
+  width: auto;
+  height: 100%;
+  object-fit: cover; /* Đảm bảo hình ảnh được phủ đầy slide mà không bị méo */
 }
 /* End partner-detail */
 

@@ -8,17 +8,17 @@ header.header
       .col-9
         .inner-menu
           ul(style="list-style: none; padding-left: 0; margin-left: 0;")
-            li
+            li.menu-item
               a(href="/categories") Danh mục
-            li
+            li.menu-item
               a(href="/cart") List
             if !user
-              li
+              li.menu-item
                 a(href="/logIn") Đăng nhập
-              li
+              li.menu-item
                 a(href="/signUp") Đăng ký
             else
-              li
+              li.menu-item
                 a(href="/profile") Thông tin cá nhân
-              li
+              li.menu-item
                 a(href="/logIn/logout") Đăng xuất
