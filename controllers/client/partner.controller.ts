@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import Partner from "../../models/partner.model";
 import sequelize from "../../config/database"; // Import sequelize
 import { QueryTypes } from "sequelize"; // Import QueryTypes
-
+import PickedPartner from "../../models/pickedPartner.model";
 // Định nghĩa kiểu cho đối tượng PartnerDetail
 interface PartnerDetail {
   id: number;
@@ -54,7 +54,7 @@ export const index = async (req: Request, res: Response) => {
 //[GET] /partners/detail/:slugPartner
 export const detail = async (req: Request, res: Response) => {
   const slugPartner = req.params.slugPartner;
-
+  const pickID=1;
   const partnerDetail = await Partner.findOne({
     where: {
       slug: slugPartner,
@@ -77,5 +77,22 @@ export const detail = async (req: Request, res: Response) => {
     });
   } else {
     res.status(404).send("Partner not found");
+  }
+}
+
+//[POST] /partners/add-to-pair
+export const addToPair = async (req: Request, res: Response) => {
+  const { pickID, partnerID } = req.body;
+
+  try {
+    await PickedPartner.create({
+      pickID,
+      partnerID
+    });
+
+    res.status(200).send({ message: "Đã thêm partner vào danh sách ghép đôi thành công" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: "Lỗi khi thêm partner vào danh sách ghép đôi" });
   }
 }

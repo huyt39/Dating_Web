@@ -2,6 +2,24 @@ extends ../../layouts/default.pug
 include ../../mixins/box-head.pug
 
 block main
+  style.
+    .btn-gradient {
+      display: inline-block;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 50px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      background: linear-gradient(135deg, #ff416c, #ff4b2b);
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .btn-gradient:hover {
+      background: linear-gradient(135deg, #ff4b2b, #ff416c);
+      color: white;
+    }
+
   .container.my-3
     .row
       .col-12 
@@ -14,4 +32,4 @@ block main
             img(src=item.image) 
             .card-body
               h5.card-title #{item.title}
-              a(href=`/partners/${item.slug}` class="btn btn-primary") Chi tiết
+              a.btn-gradient(href=`/partners/${item.slug}`) Chi tiết

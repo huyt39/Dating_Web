@@ -5,4 +5,5 @@ import * as controller from "../../controllers/client/cart.controller"
 
 router.get("/", controller.index);
 
+
 export const cartRoutes: Router=router;

@@ -5,13 +5,13 @@ include ../../mixins/moment.pug
 block main
   div(
     class="alert alert-success alert-hidden"
-    alert-add-cart-success
+    alert-add-pair-success
   ) Đã thêm vào danh sách ghép đôi! <span close-alert>x</span>
   .partner-detail
     .container.my-3
       .row
         .col-6
-          if(partnerDetail.images)
+          if partnerDetail.images
             .inner-images
               div(class="swiper imagesMain")
                 div(class="swiper-wrapper")
@@ -32,10 +32,9 @@ block main
           .inner-barcode
             i.fa-solid.fa-barcode Mã partner: #{partnerDetail.code}
           form(
-            form-add-to-cart
+            form-add-to-pair
             partner-id=partnerDetail.id
           )
-            
             button(
               type="submit"
               class="btn btn-success btn-block"

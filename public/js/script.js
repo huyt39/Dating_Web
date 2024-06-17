@@ -39,8 +39,8 @@ var imagesMain = new Swiper(".imagesMain", {
 // End Slider Partner Detail 
 
 // Hiển thị thông báo đã thêm thành công
-const alertAddCartSuccess = () => {
-  const elementAlert = document.querySelector("[alert-add-cart-success]");
+const alertAddPairSuccess = () => {
+  const elementAlert = document.querySelector("[alert-add-pair-success]");
   if (elementAlert) {
     elementAlert.classList.remove("alert-hidden");
     elementAlert.classList.add("alert");
@@ -57,104 +57,91 @@ const alertAddCartSuccess = () => {
   }
 };
 
-// Carts
-const cart = localStorage.getItem("cart");
-if (!cart) {
-  localStorage.setItem("cart", JSON.stringify([]));
-}
+// Hiển thị thông báo ghép đôi thành công
+const alertPairRequestSuccess = () => {
+  const elementAlert = document.querySelector("[alert-pair-request-success]");
+  if (elementAlert) {
+    elementAlert.classList.remove("alert-hidden");
+    elementAlert.classList.add("alert");
+    setTimeout(() => {
+      elementAlert.classList.remove("alert");
+      elementAlert.classList.add("alert-hidden");
+    }, 3000); // Sau 3s thì thêm lại class
 
-// Hiển thị thêm số lượng vào mini-cart:
-const showMiniCart = () => {
-  const miniCart = document.querySelector("[mini-cart]");
-  if (miniCart) {
-    const cart = JSON.parse(localStorage.getItem("cart"));
-    const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
-    miniCart.innerHTML = totalQuantity;
-
-    console.log(totalQuantity);
+    const closeAlert = elementAlert.querySelector("[close-alert]");
+    closeAlert.addEventListener("click", () => {
+      elementAlert.classList.remove("alert");
+      elementAlert.classList.add("alert-hidden");
+    });
   }
 };
-showMiniCart();
 
-// Thêm partner vào danh sách:
-const formAddToCart = document.querySelector("[form-add-to-cart]");
-if (formAddToCart) {
-  formAddToCart.addEventListener("submit", (event) => {
+// Lưu thông tin vào local storage:
+const saveToPairList = (partner) => {
+  const pairList = JSON.parse(localStorage.getItem("pairList")) || [];
+  pairList.push(partner);
+  localStorage.setItem("pairList", JSON.stringify(pairList));
+  alertAddPairSuccess();
+};
+
+// Thêm partner vào danh sách ghép đôi:
+const formAddToPair = document.querySelector("[form-add-to-pair]");
+if (formAddToPair) {
+  formAddToPair.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    const quantity = parseInt(event.target.elements.quantity.value);
-    const partnerId = parseInt(formAddToCart.getAttribute("partner-id"));
+    const partnerId = parseInt(formAddToPair.getAttribute("partner-id"));
+    const partnerTitle = document.querySelector(".inner-title").textContent.trim();
+    const partnerCode = document.querySelector(".inner-barcode").textContent.trim().split(": ")[1];
+    const partnerImage = document.querySelector(".inner-image img").src;
 
-    if (quantity > 0 && partnerId) {
-      const cart = JSON.parse(localStorage.getItem("cart"));
+    const partner = {
+      id: partnerId,
+      title: partnerTitle,
+      code: partnerCode,
+      image: partnerImage,
+    };
 
-      // Kiểm tra xem partner đã tồn tại trong giỏ hàng chưa
-      const indexExistPartner = cart.findIndex(item => item.partnerId == partnerId);
-      if (indexExistPartner == -1) {
-        cart.push({
-          partnerId: partnerId,
-          quantity: quantity
-        });
-      } else {
-        cart[indexExistPartner].quantity += quantity;
-      }
-      
-      // Lưu vào local storage:
-      localStorage.setItem("cart", JSON.stringify(cart));
-      alertAddCartSuccess();
-      showMiniCart();
-    }
+    saveToPairList(partner);
   });
 }
-// End Carts
 
-// Handle form submission on sign up button click
-const signUpForm = document.querySelector("#signUpForm");
-const signUpButton = document.querySelector("#signUpButton");
+// Xóa partner khỏi danh sách ghép đôi:
+const removeFromPairList = (partnerId) => {
+  let pairList = JSON.parse(localStorage.getItem("pairList")) || [];
+  pairList = pairList.filter(partner => partner.id !== partnerId);
+  localStorage.setItem("pairList", JSON.stringify(pairList));
+  loadPairList();
+};
 
-if (signUpButton && signUpForm) {
-  signUpButton.addEventListener("click", event => {
-    event.preventDefault();
+// Hiển thị danh sách ghép đôi từ local storage:
+const loadPairList = () => {
+  const pairList = JSON.parse(localStorage.getItem("pairList")) || [];
+  const pairListContainer = document.querySelector("[pair-list-container]");
 
-    // Kiểm tra các điều kiện trước khi gửi form
-    const requiredFields = [
-      document.getElementById('name'),
-      document.getElementById('email'),
-      document.getElementById('password'),
-      document.getElementById('major'),
-      document.getElementById('birthday-month'),
-      document.getElementById('birthday-day'),
-      document.getElementById('birthday-year'),
-      ...document.querySelectorAll('input[name="gender"]'),
-      document.getElementById('photo-upload-0').querySelector('input'),
-      document.getElementById('photo-upload-1').querySelector('input'),
-      document.getElementById('photo-upload-2').querySelector('input')
-    ];
-
-    const allFilled = requiredFields.every(field => {
-      if (field.type === 'file') {
-        return field.files.length > 0;
-      } else if (field.type === 'radio') {
-        return Array.from(requiredFields).filter(f => f.name === field.name && f.checked).length > 0;
-      } else {
-        return field.value.trim() !== '';
-      }
-    });
-
-    if (allFilled) {
-      signUpForm.submit();
+  if (pairListContainer) {
+    pairListContainer.innerHTML = ''; // Clear existing content
+    if (pairList.length > 0) {
+      pairList.forEach(partner => {
+        const partnerRow = document.createElement("tr");
+        partnerRow.innerHTML = `
+          <td>${partner.title}</td>
+          <td>${partner.code}</td>
+          <td><img src="${partner.image}" alt="Partner Image" width="100"></td>
+          <td>
+            <button class="btn btn-danger" onclick="removeFromPairList(${partner.id})">Xóa</button>
+            <button class="btn btn-primary" onclick="alertPairRequestSuccess()">Ghép đôi</button>
+          </td>
+        `;
+        pairListContainer.appendChild(partnerRow);
+      });
     } else {
-      alert('Please fill in all required fields.');
+      pairListContainer.innerHTML = "<p>Bạn chưa chọn partner nào.</p>";
     }
-  });
-}
-
-// Ẩn thông báo lỗi sau 3 giây
-document.addEventListener("DOMContentLoaded", () => {
-  const loginError = document.getElementById("loginError");
-  if (loginError) {
-    setTimeout(() => {
-      loginError.style.display = "none";
-    }, 3000);
   }
+};
+
+// Gọi hàm loadPairList khi trang được tải
+document.addEventListener("DOMContentLoaded", () => {
+  loadPairList();
 });
