@@ -1,4 +1,4 @@
-USE DatingApp;
+USE dating;
 
 -- Stored procedures có thể giúp tránh SQL injection vì chúng phân tách mã SQL và dữ liệu.
 
@@ -6,7 +6,7 @@ DELIMITER //
 
 CREATE PROCEDURE getUser(IN user_email VARCHAR(255), IN user_password VARCHAR(255))
 BEGIN
-    SELECT * FROM users WHERE email = user_email AND password = user_password;
+    SELECT * FROM users WHERE Email = user_email AND Password = user_password;
 END //
 
 DELIMITER ;
