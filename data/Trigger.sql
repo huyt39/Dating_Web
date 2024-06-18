@@ -82,3 +82,31 @@ BEGIN
 END;
 //
 DELIMITER ;
+
+DELIMITER //
+
+CREATE TRIGGER trg_check_password
+BEFORE INSERT ON users
+FOR EACH ROW
+BEGIN
+    IF NOT (NEW.password REGEXP '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$') THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Password must be at least 8 characters long and include both uppercase and lowercase letters, and numbers';
+    END IF;
+END;
+//
+
+CREATE TRIGGER trg_check_password_update
+BEFORE UPDATE ON users
+FOR EACH ROW
+BEGIN
+    IF NEW.password != OLD.password THEN
+        IF NOT (NEW.password REGEXP '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$') THEN
+            SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Password must be at least 8 characters long and include both uppercase and lowercase letters, and numbers';
+        END IF;
+    END IF;
+END;
+//
+
+DELIMITER ;
